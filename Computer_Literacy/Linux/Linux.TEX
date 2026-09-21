@@ -13,85 +13,165 @@
 \date{\today}
 
 \begin{document}
-\maketitle
+    \maketitle
 
-\tableofcontents
-\newpage  
-
-
-\section{File Manager - Directories}
-One of the most important aspects of using a file manager is understanding how to navigate and manage directories effectively.
-This includes creating, renaming, moving, and deleting directories, as well as understanding the hierarchical structure of the file system.\\
-
-A directory is a container used to organize files on a computer. It can contain files as well as other directories, which are often referred to as subdirectories.
+    \tableofcontents
+    \newpage  
 
 
-\section{Python \& pip}
+    \section{File Manager - Directories}
+    One of the most important aspects of using a file manager is understanding how to navigate and manage directories effectively.
+    This includes creating, renaming, moving, and deleting directories, as well as understanding the hierarchical structure of the file system.\\
 
-    \subsection{Using pip}
-
-    \subsection{Python Files}
-
-
+    A directory is a container used to organize files on a computer. It can contain files as well as other directories, which are often referred to as subdirectories.
 
 
-\section{Venv}
+    \section{Python \& pip}
 
-    \subsection{Creating a Virtual Environment}
-    A virtual environment is an isolated Python environment that allows you to manage dependencies for different projects separately. You can create a virtual environment using the following command:
-    \begin{verbatim}
-    python -m venv myenv
-    \end{verbatim}
+        \subsection{Installing Python}
+        Fist you need a compiler like VScodium. This can be downloaded and installed from its official website or through your system's package manager and the terminal.
+        you can run the command sudo apt install python3 to install Python on your system. Make sure to verify the installation by running python3 --version in the terminal.
+        
+        \subsection{Python Files}
+        PY, IPYNB, and other Python-related files are commonly used in Python development. PY files are standard Python scripts, while IPYNB files are Jupyter Notebook files that allow you to create and share documents containing live code, equations, visualizations, and narrative text.
+        It is important to understand the differences between these file types and how to work with them effectively in your Python projects.
 
-    \subsection{Activating a Virtual Environment}
-    To activate the virtual environment, use the following command:
-    \begin{verbatim}
-    source myenv/bin/activate  # On Unix or MacOS
-    myenv\Scripts\activate     # On Windows
-    \end{verbatim}
 
-\section{LaTeX In VScodium}
-
-\section{BASH}
-
-\section{GIT}
-
-    GIT is a version control system that allows you to track changes in your code and collaborate with others.
-    it is usefull for managing code changes and collaborating with others.
-
-    \subsection{Git Commands}
-
+        \subsection{Installing pip}
+        To install pip, you can use the following command:
         \begin{verbatim}
-            echo "# Example_Project" >> README.md
-            git init                        
-            # Initialize a new Git repository
-            
-            git add README.md               
-            # Stage the README file for commit
+        python -m ensurepip --upgrade
+        \end{verbatim}
+        Note: you may have a different version of python installed just replace \texttt{python} with the appropriate version, e.g., \texttt{python3}.
 
-            git commit -m "first commit"    
-            # Commit the staged changes with a message
+        \subsection{Installing Packages}
+        To install packages using pip, you can use the following command:
+        \begin{verbatim}
+        pip install "package_name"
+        \end{verbatim}
+        If a Virtual Environment is not set up this will install the package to the site-packages directory of your Python environment. 
 
-            git branch -M main              
-            # Rename the default branch to main
+    \section{Venv}
 
-            git remote add origin git@github.com:UserName/Example_Project.git 
-            # Add the remote repository
-            
-            git push -u origin main         
-            # Push the changes to the remote repository
-
-            git remote add origin git@github.com:UserName/Example_Project.git 
-            # Add the remote repository
-            
-            git branch -M main              
-            # Rename the default branch to main
-            git push -u origin main         
-            # Push the changes to the remote repository
+        \subsection{Creating a Virtual Environment}
+        A virtual environment is an isolated Python environment that allows you to manage dependencies for different projects separately. You can create a virtual environment using the following command:
+        \begin{verbatim}
+        python -m venv myenv
         \end{verbatim}
 
-        In your  degree you will use git to manage your code, track changes, and collaborate with your peers on various projects.
+        \subsection{Activating a Virtual Environment}
+        To activate the virtual environment, use the following command:
+        \begin{verbatim}
+        source myenv/bin/activate  # On Unix or MacOS
+        myenv\Scripts\activate     # On Windows
+        \end{verbatim}
+
+    \section{LaTeX In VScodium}
+
+        LaTeX is not important for first or second-year students, although some people do use it, you will not get any extra marks, and if you dont know what your doing it is not better than using just a regular text editor text editor.
+        Side note: microsoft word can also use LaTeX but you will have to figure that out yourselfs.
+
+        VScodium is a lightweight, open-source code editor based on Visual Studio Code. 
+        Some people may choose to use OverLeaf to compile and preview their LaTeX documents online, however this is slow and may require you to pay for a subscription to compile you work. 
+        In my opinion, using VScodium for LaTeX is a much better alternative, it means you can compile and preview your documents locally without relying on an internet connection or a paid subscription.
+
+        The extension i use is called \texttt{LaTeX Workshop}. I havent yet Tried anything else as this works just fine.
+        Make sure to install this extension from the VScodium marketplace to enable LaTeX support, including compilation, preview, and syntax highlighting.
+        If you are reading this after the talk, you can follow the instructions in the appendix to set up VScodium for LaTeX.
+        
+        
+    \section{BASH}
+
+        BASH (Bourne Again SHell) is a command-line shell used for interacting with the operating system.
+        It allows you to execute commands, run scripts, and automate tasks efficiently.
+        the command "- -help" after any command to get more information about its usage. 
+        or the command "man" followed by the command name to access the manual. For example:
+ 
+        \subsection{Basic BASH Commands}
+
+            \begin{verbatim}
+            # List files and directories
+            ls
+
+            # Change directory
+            cd /path/to/directory
+
+            # Create a new directory
+            mkdir new_directory
+
+            # Remove a file
+            rm file_name
+
+            # Remove a directory and its contents
+            rm -r directory_name
+
+            # Display the current directory
+            pwd
+
+            # stop running processes in the terminal
+            Ctrl+C
+
+            # copy and paste changes picking up a shift
+            Cntrl+Shift+V  # Paste in terminal
+            Cntrl+Shift+C  # Copy in terminal
+
+            # stop the terminal
+            exit
+
+            # clear the terminal
+            clear
+
+            # run as administrator
+            sudo command_here
+
+            # search for a file or directory
+            find path -name file_name
+
+            % open vscodium 
+            codium . # Open the current directory in VScodium
+            codium file_name  # Open a specific file in VScodium
+            \end{verbatim}
+
+
+    \section{GIT}
+
+        GIT is a version control system that allows you to track changes in your code and collaborate with others.
+        it is usefull for managing code changes and collaborating with others.
+
+        \subsection{Git Commands}
+
+            \begin{verbatim}
+                echo "# Example_Project" >> README.md
+                git init                        
+                # Initialize a new Git repository
+                
+                git add README.md               
+                # Stage the README file for commit
+
+                git commit -m "first commit"    
+                # Commit the staged changes with a message
+
+                git branch -M main              
+                # Rename the default branch to main
+
+                git remote add origin git@github.com:UserName/Example_Project.git 
+                # Add the remote repository
+                
+                git push -u origin main         
+                # Push the changes to the remote repository
+
+                git remote add origin git@github.com:UserName/Example_Project.git 
+                # Add the remote repository
+                
+                git branch -M main              
+                # Rename the default branch to main
+                git push -u origin main         
+                # Push the changes to the remote repository
+            \end{verbatim}
+
+            In your  degree you will use git to manage your code, track changes, and collaborate with your peers on various projects.
 
 
 
 \end{document}
+
