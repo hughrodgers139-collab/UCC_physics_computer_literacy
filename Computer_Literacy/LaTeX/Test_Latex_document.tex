@@ -1,0 +1,150 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+\title{This is a Title}
+\author{Physics Society-Academic Officer-Hugh Rodgers}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\raggedright
+
+\section{Basic Text}
+This is normal text.\\
+\textbf{Bold text}\\
+\textit{Italic text}\\
+\underline{Underlined text}
+\begin{center}
+    Centered Text
+\end{center}
+
+\begin{flushright}
+    Right-aligned Text
+\end{flushright}
+
+\begin{flushleft}
+    Left-aligned Text
+\end{flushleft}
+
+\Huge{This is big text}\\
+\LARGE{This is larger text}\\
+\Large{This is large text}\\
+\normalsize{This is normal text}\\
+\small{This is small text}\\
+\footnotesize{This is footnote size text}\\
+\scriptsize{This is script size text}\\
+\tiny{This is tiny text}\\
+
+
+\section{Lists}
+\begin{itemize}
+\item First item
+\item Second item
+\end{itemize}
+
+\begin{enumerate}
+\item Step One
+\item Step Two
+\end{enumerate}
+
+\section{Equations}
+Inline maths: $E=mc^2$.
+
+\begin{equation}
+F=ma
+\label{eq:newton}
+\end{equation}
+
+Reference Equation~\ref{eq:newton}.
+
+\section{Matrices}
+\[
+A=\begin{pmatrix}
+1 & 2\\
+3 & 4
+\end{pmatrix}
+\]
+
+\section{Calculus}
+\[
+\dv{y}{x},\qquad
+\pdv{f}{x},\qquad
+\int_0^1 x^2\,dx
+\]
+
+\section{Vectors and Physics}
+\[
+\vb{F}=m\vb{a}
+\]
+
+\[
+\nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0}
+\]
+
+\section{Quantum Mechanics}
+\[
+\ket{\psi},\qquad
+\bra{\phi},\qquad
+\braket{\phi|\psi}
+\]
+
+\section{Units}
+\[
+c=\SI{2.99792458e8}{\metre\per\second}
+\]
+
+\section{Table Example}
+\begin{table}[H]
+\centering
+\begin{tabular}{cc}
+\toprule
+x & y\\
+\midrule
+1 & 2\\
+2 & 4\\
+\bottomrule
+\end{tabular}
+\caption{Example Table}
+\end{table}
+
+\section{Code Example}
+\begin{lstlisting}
+import numpy as np
+x = np.linspace(0,10,100)
+print(x)
+\end{lstlisting}
+
+\section{Figures}
+Add figures using:
+\begin{verbatim}
+\includegraphics[width=0.5\textwidth]{LaTeX/LaTeX_meme.png}
+
+\end{verbatim}
+
+\section{Hyperlinks}
+\url{https://www.ucc.ie}
+
+\section{Conclusion}
+This document demonstrates the most useful LaTeX features for undergraduate physics students.
+
+\bibliographystyle{plain}
+\bibliography{LaTeX/ref.bib}
+\end{document}
