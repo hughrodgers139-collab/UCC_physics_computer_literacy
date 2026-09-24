@@ -22,128 +22,148 @@
 \date{\today}
 
 \begin{document}
-\maketitle
-\tableofcontents
-\newpage
-\raggedright
+    \maketitle
+    \tableofcontents
+    \newpage
+    \raggedright
 
-\section{Basic Text}
-This is normal text.\\
-\textbf{Bold text}\\
-\textit{Italic text}\\
-\underline{Underlined text}
-\begin{center}
-    Centered Text
-\end{center}
+    \section{Setting up LaTeX in VScodium}
+        % To use LaTeX in VScodium, it is helpful to have some basic understanding of how directories and files work. 
+        % I will be focusing on LaTeX Workshop as it what i am familiar. 
+        % LaTeX Workshop is an extension for VScodium that allows you to compile LaTeX documents into .pdf files in the directory. 
+        % Once you have this or another package install, you will have to make a directory in which you can test this. 
+        % In this directory you will create and edit the Test_Latex_document.TEX file. I have left the Test_Latex_document.tex file in the repository for this as example to test and see if you can run it. 
+        % To compile the LaTeX document into a PDF, you can use the build command provided by the LaTeX Workshop extension or ctrl+alt+b unless you have customized the keybindings.
+        % This should create many different files of many different types in the directory. I would reocment hiding these files as they are only used to make the compilation process faster. 
+        % You can hide these files by makeing a .vscode directory and adding a settings.json file with the following content:
+        % \begin{verbatim}
+        % {
+        %     "files.exclude": {
+        %         "**/*.aux": true,
+        %         "**/*.log": true,
+        %         "**/*.out": true,
+        %         "**/*.toc": true
+        %     }
+        % }
+        % \end{verbatim}
 
-\begin{flushright}
-    Right-aligned Text
-\end{flushright}
+    \section{Basic Text}
+        This is normal text.\\
+        \textbf{Bold text}\\
+        \textit{Italic text}\\
+        \underline{Underlined text}
+        \begin{center}
+            Centered Text
+        \end{center}
 
-\begin{flushleft}
-    Left-aligned Text
-\end{flushleft}
+        \begin{flushright}
+            Right-aligned Text
+        \end{flushright}
 
-\Huge{This is big text}\\
-\LARGE{This is larger text}\\
-\Large{This is large text}\\
-\normalsize{This is normal text}\\
-\small{This is small text}\\
-\footnotesize{This is footnote size text}\\
-\scriptsize{This is script size text}\\
-\tiny{This is tiny text}\\
+        \begin{flushleft}
+            Left-aligned Text
+        \end{flushleft}
+
+        \Huge{This is big text}\\
+        \LARGE{This is larger text}\\
+        \Large{This is large text}\\
+        \normalsize{This is normal text}\\
+        \small{This is small text}\\
+        \footnotesize{This is footnote size text}\\
+        \scriptsize{This is script size text}\\
+        \tiny{This is tiny text}\\
 
 
-\section{Lists}
-\begin{itemize}
-\item First item
-\item Second item
-\end{itemize}
+    \section{Lists}
+        \begin{itemize}
+        \item First item
+        \item Second item
+        \end{itemize}
 
-\begin{enumerate}
-\item Step One
-\item Step Two
-\end{enumerate}
+        \begin{enumerate}
+        \item Step One
+        \item Step Two
+        \end{enumerate}
 
-\section{Equations}
-Inline maths: $E=mc^2$.
+    \section{Equations}
+        Inline maths: $E=mc^2$.
 
-\begin{equation}
-F=ma
-\label{eq:newton}
-\end{equation}
+        \begin{equation}
+        F=ma
+        \label{eq:newton}
+        \end{equation}
 
-Reference Equation~\ref{eq:newton}.
+        Reference Equation~\ref{eq:newton}.
 
-\section{Matrices}
-\[
-A=\begin{pmatrix}
-1 & 2\\
-3 & 4
-\end{pmatrix}
-\]
+    \section{Matrices}
+        \[
+        A=\begin{pmatrix}
+        1 & 2\\
+        3 & 4
+        \end{pmatrix}
+        \]
 
-\section{Calculus}
-\[
-\dv{y}{x},\qquad
-\pdv{f}{x},\qquad
-\int_0^1 x^2\,dx
-\]
+        \section{Calculus}
+        \[
+        \dv{y}{x},\qquad
+        \pdv{f}{x},\qquad
+        \int_0^1 x^2\,dx
+        \]
 
-\section{Vectors and Physics}
-\[
-\vb{F}=m\vb{a}
-\]
+    \section{Vectors and Physics}
+        \[
+        \vb{F}=m\vb{a}
+        \]
 
-\[
-\nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0}
-\]
+        \[
+        \nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0}
+        \]
 
-\section{Quantum Mechanics}
-\[
-\ket{\psi},\qquad
-\bra{\phi},\qquad
-\braket{\phi|\psi}
-\]
+    \section{Quantum Mechanics}
+        \[
+        \ket{\psi},\qquad
+        \bra{\phi},\qquad
+        \braket{\phi|\psi}
+        \]
 
-\section{Units}
-\[
-c=\SI{2.99792458e8}{\metre\per\second}
-\]
+    \section{Units}
+        \[
+        c=\SI{2.99792458e8}{\metre\per\second}
+        \]
 
-\section{Table Example}
-\begin{table}[H]
-\centering
-\begin{tabular}{cc}
-\toprule
-x & y\\
-\midrule
-1 & 2\\
-2 & 4\\
-\bottomrule
-\end{tabular}
-\caption{Example Table}
-\end{table}
+    \section{Table Example}
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{cc}
+        \toprule
+        x & y\\
+        \midrule
+        1 & 2\\
+        2 & 4\\
+        \bottomrule
+        \end{tabular}
+        \caption{Example Table}
+        \end{table}
 
-\section{Code Example}
-\begin{lstlisting}
-import numpy as np
-x = np.linspace(0,10,100)
-print(x)
-\end{lstlisting}
+    \section{Code Example}
+        \begin{lstlisting}
+        import numpy as np
+        x = np.linspace(0,10,100)
+        print(x)
+        \end{lstlisting}
 
-\section{Figures}
-Add figures using:
-\begin{verbatim}
-\includegraphics[width=0.5\textwidth]{LaTeX/LaTeX_meme.png}
+    \section{Figures}
+        Add figures using:
+        \begin{verbatim}
+        \includegraphics[width=0.5\textwidth]{LaTeX/LaTeX_meme.png}
 
-\end{verbatim}
+    \end{verbatim}
 
-\section{Hyperlinks}
-\url{https://www.ucc.ie}
+    \section{Hyperlinks}
+        \url{https://www.ucc.ie}
 
-\section{Conclusion}
-This document demonstrates the most useful LaTeX features for undergraduate physics students.
+    \section{Conclusion}
+        This document demonstrates the most useful LaTeX features for undergraduate physics students.
 
 \bibliographystyle{plain}
 \bibliography{LaTeX/ref.bib}

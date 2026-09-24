@@ -1,0 +1,17 @@
+__pycache__/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.txt
+*.log
+*.bak
+*.cache
+*.dat
+*.tmp
+*.xlsx
+*.csv
+*.json
+.vscode/

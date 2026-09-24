@@ -20,21 +20,21 @@
 
 
     \section{File Manager - Directories}
-    One of the most important aspects of using a file manager is understanding how to navigate and manage directories effectively.
-    This includes creating, renaming, moving, and deleting directories, as well as understanding the hierarchical structure of the file system.\\
+    % One of the most important aspects of using a file manager is understanding how to navigate and manage directories effectively.
+    % This includes creating, renaming, moving, and deleting directories, as well as understanding the hierarchical structure of the file system.\\
 
-    A directory is a container used to organize files on a computer. It can contain files as well as other directories, which are often referred to as subdirectories.
-
+    % A directory is a container used to organize files on a computer. It can contain files as well as other directories, which are often referred to as subdirectories.
+    
 
     \section{Python \& pip}
 
         \subsection{Installing Python}
-        Fist you need a compiler like VScodium. This can be downloaded and installed from its official website or through your system's package manager and the terminal.
-        you can run the command sudo apt install python3 to install Python on your system. Make sure to verify the installation by running python3 --version in the terminal.
+        First you need a compiler like VScodium. This can be downloaded and installed from its official website or through your system's package manager and the terminal.
+        You can run the command sudo apt install python3 to install Python on your system. Make sure to verify the installation by running python3 --version in the terminal.
         
         \subsection{Python Files}
-        PY, IPYNB, and other Python-related files are commonly used in Python development. PY files are standard Python scripts, while IPYNB files are Jupyter Notebook files that allow you to create and share documents containing live code, equations, visualizations, and narrative text.
-        It is important to understand the differences between these file types and how to work with them effectively in your Python projects.
+        .py, .ipynb and other Python-related files are commonly used in Python development. .py files are standard Python scripts, while .ipynb files are Jupyter Notebook files 
+        that allow you to create and share documents containing live code, equations, visualizations, and narrative text.
 
 
         \subsection{Installing pip}
@@ -54,7 +54,8 @@
     \section{Venv}
 
         \subsection{Creating a Virtual Environment}
-        A virtual environment is an isolated Python environment that allows you to manage dependencies for different projects separately. You can create a virtual environment using the following command:
+        A virtual environment is an isolated Python environment that allows you to manage dependencies for different projects separately. You can create a virtual environment 
+        using the following command:
         \begin{verbatim}
         python -m venv myenv
         \end{verbatim}
@@ -64,21 +65,7 @@
         \begin{verbatim}
         source myenv/bin/activate  # On Unix or MacOS
         myenv\Scripts\activate     # On Windows
-        \end{verbatim}
-
-    \section{LaTeX In VScodium}
-
-        LaTeX is not important for first or second-year students, although some people do use it, you will not get any extra marks, and if you dont know what your doing it is not better than using just a regular text editor text editor.
-        Side note: microsoft word can also use LaTeX but you will have to figure that out yourselfs.
-
-        VScodium is a lightweight, open-source code editor based on Visual Studio Code. 
-        Some people may choose to use OverLeaf to compile and preview their LaTeX documents online, however this is slow and may require you to pay for a subscription to compile you work. 
-        In my opinion, using VScodium for LaTeX is a much better alternative, it means you can compile and preview your documents locally without relying on an internet connection or a paid subscription.
-
-        The extension i use is called \texttt{LaTeX Workshop}. I havent yet Tried anything else as this works just fine.
-        Make sure to install this extension from the VScodium marketplace to enable LaTeX support, including compilation, preview, and syntax highlighting.
-        If you are reading this after the talk, you can follow the instructions in the appendix to set up VScodium for LaTeX.
-        
+        \end{verbatim}        
         
     \section{BASH}
 
@@ -131,7 +118,13 @@
             codium . # Open the current directory in VScodium
             codium file_name  # Open a specific file in VScodium
             \end{verbatim}
-
+        
+        \subsection{Creating Bash Shortcuts ~/.bashrc file}
+        I have added an example ~/.bashrc file in the attached .txt file.
+        In linux you can add a ~/.bashrc file which you can use to create custom aliases and functions to make your terminal workflow more efficient.
+        This makes setting up a new project very easy, for example when setting this up i was able to put in 3 or 4 command to the
+        terminal, which connect this directory to the github repository, created the .TEX files, created the .venv, created the 
+        .vscode/settings.json with some preloaded files to hide.
 
     \section{GIT}
 
@@ -173,5 +166,13 @@
 
 
 
+    \section{Fun with the Terminal}
+            Here are some fun things you can do with the terminal:
+            sudo apt install cowsay
+            sudo apt install fortune
+            sudo apt install cmatrix
+            sudo apt install fastfetch or others
+            sudo apt install sl
+            sudo apt install wtf            
 \end{document}
 
