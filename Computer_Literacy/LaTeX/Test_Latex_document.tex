@@ -19,7 +19,7 @@
 
 \title{This is a Title}
 \author{Physics Society-Academic Officer-Hugh Rodgers}
-\date{\today}
+\date{last update \today}
 
 \begin{document}
     \maketitle
@@ -27,25 +27,11 @@
     \newpage
     \raggedright
 
-    \section{Setting up LaTeX in VScodium}
-        % To use LaTeX in VScodium, it is helpful to have some basic understanding of how directories and files work. 
-        % I will be focusing on LaTeX Workshop as it what i am familiar. 
-        % LaTeX Workshop is an extension for VScodium that allows you to compile LaTeX documents into .pdf files in the directory. 
-        % Once you have this or another package install, you will have to make a directory in which you can test this. 
-        % In this directory you will create and edit the Test_Latex_document.TEX file. I have left the Test_Latex_document.tex file in the repository for this as example to test and see if you can run it. 
-        % To compile the LaTeX document into a PDF, you can use the build command provided by the LaTeX Workshop extension or ctrl+alt+b unless you have customized the keybindings.
-        % This should create many different files of many different types in the directory. I would reocment hiding these files as they are only used to make the compilation process faster. 
-        % You can hide these files by makeing a .vscode directory and adding a settings.json file with the following content:
-        % \begin{verbatim}
-        % {
-        %     "files.exclude": {
-        %         "**/*.aux": true,
-        %         "**/*.log": true,
-        %         "**/*.out": true,
-        %         "**/*.toc": true
-        %     }
-        % }
-        % \end{verbatim}
+    This document comes with a .TEX file which contains all the LaTeX syntax, it is intended to be read at the same time as the PDF.
+    Comments in latex are done as a  percent sign (\%) followed by the comment text. \\ 
+    \% Insert comment here\\
+    The accompanying .TEX file has many comments explaining the LaTeX syntax used.
+    % This is what a comment looks like, you may notice it does not appear in the PDF
 
     \section{Basic Text}
         This is normal text.\\
@@ -73,8 +59,12 @@
         \scriptsize{This is script size text}\\
         \tiny{This is tiny text}\\
 
+        \normalsize
+        If you want two columns, you can use the \texttt{\textbackslash twocolumn[]} and return to single column with \texttt{\textbackslash onecolumn}.
+        % the \tttext is used to display text in typewriter (monospaced) font and \backslash is used to display the backslash character itself on the pdf
+        % the backslash in latex usually indicates a command meaning what follows is given special meaning
 
-    \section{Lists}
+    \section{Lists} % it is generaly not a good idea to use this in your labreport unless completely necessary, 
         \begin{itemize}
         \item First item
         \item Second item
@@ -85,17 +75,35 @@
         \item Step Two
         \end{enumerate}
 
-    \section{Equations}
-        Inline maths: $E=mc^2$.
 
+    \section{Equations}
+        There are many different ways of writing equations in LaTeX.
+
+        \text{\$ F=ma\$} returns - $F=ma$ - which is in the inline math mode meaning writing equations within a line of text.
+
+        The rest of the equations are hard to write in the pdf so please look at the .tex file to see how they are written.
         \begin{equation}
-        F=ma
+        E = mc^2
         \label{eq:newton}
         \end{equation}
+        This makes the equation referenceable in the document~\ref{eq:newton}.
 
-        Reference Equation~\ref{eq:newton}.
+        \[
+        \left\langle \psi_i |\psi_j \right\rangle = \delta_{i,j}
+        \]
 
-    \section{Matrices}
+        \(
+        u^i v_i = \sum_i^n u^i v_i = \mathbf{u} \cdot \mathbf{v} = u_1 v_1 + u_2 v_2 + 
+        \dots + u_n v_n
+        \)
+        
+        \[
+        \dv{y}{x},\qquad % \qquad is a method to add space between elements
+        \pdv{f}{x},\qquad % other methods spacing between elements in math mode are \, \,, \:, \;, \quad, \qquad
+        \int_0^1 x^2\,dx,\qquad
+        \iiint_0^1 x^2\,dxdydz
+        \]
+
         \[
         A=\begin{pmatrix}
         1 & 2\\
@@ -103,35 +111,6 @@
         \end{pmatrix}
         \]
 
-        \section{Calculus}
-        \[
-        \dv{y}{x},\qquad
-        \pdv{f}{x},\qquad
-        \int_0^1 x^2\,dx
-        \]
-
-    \section{Vectors and Physics}
-        \[
-        \vb{F}=m\vb{a}
-        \]
-
-        \[
-        \nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0}
-        \]
-
-    \section{Quantum Mechanics}
-        \[
-        \ket{\psi},\qquad
-        \bra{\phi},\qquad
-        \braket{\phi|\psi}
-        \]
-
-    \section{Units}
-        \[
-        c=\SI{2.99792458e8}{\metre\per\second}
-        \]
-
-    \section{Table Example}
         \begin{table}[H]
         \centering
         \begin{tabular}{cc}
@@ -145,26 +124,48 @@
         \caption{Example Table}
         \end{table}
 
-    \section{Code Example}
+        \[
+        c=\SI{2.99792458e8}{\metre\per\second}
+        \]
+
+        \[
+        \vb{F}=m\vb{a}
+        \]
+
+        \[
+        \nabla\cdot\vb{E}=\frac{\rho}{\epsilon_0}
+        \]
+
+ 
+    \section{Code Example} % code should fall in the appendex of the lab report just to show what was done, may not be necessary but easier that a screenshot 
         \begin{lstlisting}
         import numpy as np
         x = np.linspace(0,10,100)
         print(x)
         \end{lstlisting}
 
+
     \section{Figures}
         Add figures using:
-        \begin{verbatim}
-        \includegraphics[width=0.5\textwidth]{LaTeX/LaTeX_meme.png}
 
-    \end{verbatim}
+        % [H] forces the figure to appear exactly here
+        \begin{figure}[H]
+            % other things can be included to make you image look nicer
+            \centering
+            \includegraphics[width=0.5\textwidth]{LaTeX_meme.png}
+            \caption{Example figure Caption}
+            \label{fig:example_figure_label}
 
-    \section{Hyperlinks}
-        \url{https://www.ucc.ie}
+        \end{figure}
+        \ref{fig:example_figure_label}
 
-    \section{Conclusion}
-        This document demonstrates the most useful LaTeX features for undergraduate physics students.
+    \section{Links}
+        This is an example of a link to Overleaf LaTeX Examples \cite{overleaf_examples}
 
-\bibliographystyle{plain}
-\bibliography{LaTeX/ref.bib}
+
+    \section{references and bib files}
+
+        \bibliographystyle{plain}
+        \bibliography{LaTeX/ref.bib}
+
 \end{document}

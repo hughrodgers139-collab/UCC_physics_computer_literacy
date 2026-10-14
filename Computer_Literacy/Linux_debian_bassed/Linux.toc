@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}File Manager - Directories}{2}{section.1}%
+\contentsline {section}{\numberline {2}Python \& pip}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Installing Python}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Python Files}{2}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Installing pip}{2}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Installing Packages}{2}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Venv}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Creating a Virtual Environment}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Activating a Virtual Environment}{2}{subsection.3.2}%
+\contentsline {section}{\numberline {4}BASH}{3}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Basic BASH Commands}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Creating Bash Shortcuts ~/.bashrc file}{4}{subsection.4.2}%
+\contentsline {section}{\numberline {5}GIT}{4}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Git Commands}{4}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Fun with the Terminal}{4}{section.6}%

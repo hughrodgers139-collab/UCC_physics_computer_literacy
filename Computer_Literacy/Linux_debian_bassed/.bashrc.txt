@@ -1,0 +1,219 @@
+# this is possibly the most important function you can make. It allows you to lable all the functions and alias
+# then print a list in the terminal when you type the command "shortcuts". just make sure to add the description 
+
+
+# description
+SHORTCUTS_DESC="Show all aliases and functions with their descriptions"
+
+shortcuts() {
+    echo "=============================="
+    echo "           ALIASES            "
+    echo "=============================="
+    alias | awk -F'[ =]' '{printf "%-20s %s\n", $2, $0}'
+
+    echo
+    echo "=============================="
+    echo "          FUNCTIONS           "
+    echo "=============================="
+
+    while read -r fn; do
+        desc_var="${fn^^}_DESC"
+        desc="${!desc_var}"
+
+        [[ -n "$desc" ]] && printf "%-20s %s\n" "$fn" "$desc"
+    done < <(declare -F | awk '{print $3}' | sort)
+
+    echo
+}
+
+
+
+
+
+
+
+# "=============================="
+# "          ALIASES             "
+# "=============================="
+
+alias ls='ls --color=auto'                          # Colour listing
+alias open_venv='source .venv/bin/activate'         # Activate local venv
+alias bash='code ~/.bashrc'                         # open the ~/.bashrc file in vscode
+alias reload='source ~/.bashrc'                     # Reload bashrc to update the new commands
+
+alias Directory_name='cd ~/Directory1/Directory2/Directory3/Directory4'     # enters you into a specific Directory
+
+
+
+
+
+
+
+
+# =============================================
+# GIT UPDATE This probalby isnt a good practice 
+# for most programers but im lazy, sooo
+# this is for updating you gitrepo quickly
+# =============================================
+
+GITUPDATE_DESC="Interactive git update wizard"
+gitupdate() {
+    branch=$(git branch --show-current)
+
+    echo
+    echo "Current branch: $branch"
+    echo
+
+    git status --short
+    echo
+
+    read -p "Commit message: " msg
+
+    git add .
+
+    git commit -m "$msg" || {
+        echo "Nothing to commit."
+    }
+
+    echo
+    echo "Pushing $branch to GitHub..."
+
+    git push -u origin "$branch"
+
+    echo
+    echo " Branch '$branch' is now on GitHub and tracking origin/$branch"
+}
+
+
+
+
+
+
+
+
+# ======================================================
+# This sets up a latex file the way i like it
+# It contains all the packages i could ever want 
+# you will definatly have to change this for you own style
+# ======================================================
+
+MKTEX_DESC="Create a new .tex file with basic structure and a ref.bib file"
+mktex() {
+    local name="$1"
+    if [ -z "$name" ]; then
+        echo "Usage: mktex <filename>"
+        return 1
+    fi
+
+    cat <<EOL > "$name.tex"
+\documentclass[a4paper,11pt]{article} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[margin=2.5cm]{geometry} 
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{amsthm} 
+\usepackage{mathtools} 
+\usepackage{physics} 
+\usepackage{bm} 
+\usepackage{graphicx} 
+\usepackage{float} 
+\usepackage{subcaption} 
+\usepackage{booktabs} 
+\usepackage{multirow} 
+\usepackage{array} 
+\usepackage{siunitx} 
+\sisetup{ separate-uncertainty = true, exponent-product = \cdot, per-mode = symbol } 
+\usepackage{xcolor} 
+\usepackage{listings} 
+\lstset{ language=Python, basicstyle=\ttfamily\small, keywordstyle=\color{blue}, commentstyle=\color{green!50!black}, stringstyle=\color{red}, numbers=left, numberstyle=\tiny, breaklines=true, frame=single, showstringspaces=false } 
+\usepackage[ backend=biber, style=numeric, sorting=none ]{biblatex} 
+\addbibresource{ref.bib} 
+\usepackage[ colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue ]{hyperref} 
+\usepackage[nameinlink]{cleveref} 
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{lemma}{Lemma}[section] 
+\newtheorem{corollary}{Corollary}[section] 
+\newtheorem{definition}{Definition}[section] 
+\newtheorem{example}{Example}[section] 
+\newtheorem{remark}{Remark}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{notation}{Notation}[section]
+\newtheorem{convention}{Convention}[section]
+
+\begin{document}
+
+\title{}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\end{document}
+EOL
+    echo "Created file: $name.tex"
+    touch "$name.ref.bib"
+    echo "Created file: $ref.bib"
+}
+
+
+
+
+
+
+
+# =============================================
+# If you are using vscode for latex i would recoment
+# setting up a .vscode/settings.json file to make 
+# it nicer to use
+# This will hide files you dont want to see
+# IT WILL NOT DELETE THEM so if you wana see the file 
+# again, delete its type from the settings.json file
+# =============================================
+
+MKHIDE_DESC="Create a .vscode directory with recommended settings for Python projects"
+mkhide() {
+    mkdir -p .vscode
+    cat <<EOL > .vscode/settings.json
+{
+  "files.exclude": {
+    "**/*.{log,aux,out,fls,fdb_latexmk,bbl,blg,toc}": true,
+    "**/*.synctex.gz": true
+  }
+}
+EOL
+    nano .vscode/settings.json
+}
+
+
+
+
+
+
+# =============================================
+# lastly making a .venv with some libraries 
+# pre-installed once again because im lazy
+# =============================================
+
+MKVENV_DESC="Create project directory, create venv, activate it"
+mkvenv() { # if left blank, default name = .venv
+    [ -z "$1" ] && {
+        set -- ".venv"
+    }
+
+    mkdir -p "$1"
+    cd "$1" || return
+
+    python3 -m venv .venv
+    source .venv/bin/activate
+
+    echo "Created and activated .venv in $(pwd)"
+    
+    pip install numpy scipy pandas matplotlib astropy jupyter
+}
+
+

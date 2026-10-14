@@ -1,0 +1,9 @@
+// VS Code settings for excluding certain file types from the workspace
+{
+  "files.exclude": {
+    "**/*.{log,aux,out,fls,fdb_latexmk,bbl,blg,toc}": true, // Exclude common LaTeX auxiliary files
+    "**/*.synctex.gz": true // Exclude LaTeX SyncTeX files
+  }
+}
+
+

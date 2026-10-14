@@ -20,11 +20,25 @@
 
 
     \section{File Manager - Directories}
-    % One of the most important aspects of using a file manager is understanding how to navigate and manage directories effectively.
-    % This includes creating, renaming, moving, and deleting directories, as well as understanding the hierarchical structure of the file system.\\
+        File managers are used to navigate and manage the file system. They allow you to create, move, copy, and delete files and directories efficiently.
+        It is very important to keep your files organized and to save data in the appropriate formats to ensure easy access and proper functionality.
+        Proper file management helps prevent data loss, improves productivity, and makes it easier to collaborate with others.
+        
 
-    % A directory is a container used to organize files on a computer. It can contain files as well as other directories, which are often referred to as subdirectories.
-    
+        \subsection{file types, saving data}
+            Certian files are used for certian things, for example:
+            \begin{itemize}
+                \item \texttt{.txt} for text files
+                \item \texttt{.sh} for shell scripts
+                \item \texttt{.py} for Python scripts
+                \item \texttt{.TEX} for LaTeX documents
+                \item \texttt{.md} for Markdown files
+                \item \texttt{.csv} for comma-separated values files
+                \item \texttt{.bak} for backup files
+            \end{itemize}
+
+        creating backups is essential to prevent data loss. Backup files, often with the extension \texttt{.bak}, are copies of important files that can be restored if the original files are accidentally deleted or corrupted.
+
 
     \section{Python \& pip}
 
@@ -51,6 +65,8 @@
         \end{verbatim}
         If a Virtual Environment is not set up this will install the package to the site-packages directory of your Python environment. 
 
+
+
     \section{Venv}
 
         \subsection{Creating a Virtual Environment}
@@ -63,10 +79,12 @@
         \subsection{Activating a Virtual Environment}
         To activate the virtual environment, use the following command:
         \begin{verbatim}
-        source myenv/bin/activate  # On Unix or MacOS
+        source myenv/bin/activate  # On linux or MacOS
         myenv\Scripts\activate     # On Windows
         \end{verbatim}        
         
+
+
     \section{BASH}
 
         BASH (Bourne Again SHell) is a command-line shell used for interacting with the operating system.
@@ -126,6 +144,8 @@
         terminal, which connect this directory to the github repository, created the .TEX files, created the .venv, created the 
         .vscode/settings.json with some preloaded files to hide.
 
+
+
     \section{GIT}
 
         GIT is a version control system that allows you to track changes in your code and collaborate with others.
@@ -162,17 +182,18 @@
                 # Push the changes to the remote repository
             \end{verbatim}
 
-            In your  degree you will use git to manage your code, track changes, and collaborate with your peers on various projects.
+            In your  degree you will use git to manage your code, track changes, and collaborate with your peers on various projects
 
 
 
-    \section{Fun with the Terminal}
-            Here are some fun things you can do with the terminal:
-            sudo apt install cowsay
-            sudo apt install fortune
-            sudo apt install cmatrix
-            sudo apt install fastfetch or others
-            sudo apt install sl
-            sudo apt install wtf            
+
+    % \section{Fun with the Terminal}
+    %         Here are some fun things you can do with the terminal:
+    %         sudo apt install cowsay
+    %         sudo apt install fortune
+    %         sudo apt install cmatrix
+    %         sudo apt install fastfetch or others
+    %         sudo apt install sl
+    %         sudo apt install wtf            
 \end{document}
 
