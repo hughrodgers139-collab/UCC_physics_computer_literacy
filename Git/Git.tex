@@ -1,0 +1,232 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\title{Git and GitHub for Physics\\One Shared Guide for Every Operating System}
+\author{UCC Physics Society}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+
+\section{Git is not GitHub}
+Git records project history locally. GitHub hosts repositories online and
+adds pull requests and reviews. Saving, committing, and pushing are different
+operations; local Git works offline. The commands here work in PowerShell,
+Bash, and the VS Code integrated terminal. For a command reference, see the
+official \href{https://git-scm.com/docs}{Git documentation} and
+\href{https://git-scm.com/book/en/v2}{Pro Git}.
+
+
+\section{Identity and authentication}
+Check \texttt{git --version}, then configure the identity used on new commits:
+If Git is missing, follow the installation instructions in your
+\href{../README.md}{operating-system guide} or use the
+\href{https://git-scm.com/downloads}{official Git download page}.
+
+\begin{lstlisting}
+git config --global user.name "Your Name"
+git config --global user.email "YOUR_CHOSEN_EMAIL"
+\end{lstlisting}
+Replace both placeholders. If you want email privacy, obtain your GitHub
+no-reply address from account settings \emph{before} making public commits.
+For one repository, omit \texttt{--global} and run inside it.
+Never alter another user's global configuration on a shared login.
+
+
+Author identity is \textbf{not login}:
+\begin{description}
+\item[HTTPS:] Use an approved credential manager/browser sign-in, or a narrowly
+scoped token when required. An account password is not a Git HTTPS password.
+\item[SSH:] Follow
+\href{https://docs.github.com/en/authentication/connecting-to-github-with-ssh}{GitHub's SSH guide}.
+Add only your public key to GitHub; keep the private key private.
+\end{description}
+Do not put tokens in remote URLs, notebooks, screenshots, or source.
+Do not disable TLS or host-key checks to bypass authentication problems.
+
+\section{Mental model and inspection commands}
+\begin{center}
+Working tree $\xrightarrow{\texttt{git add}}$ staging area
+$\xrightarrow{\texttt{git commit}}$ local history
+\end{center}
+Pushing sends local commits to a remote repository; it does not automatically
+include uncommitted edits.
+\begin{longtable}{p{0.36\linewidth}p{0.57\linewidth}}
+\toprule Command & Meaning\\ \midrule
+\texttt{git status} & What changed, what is staged, current branch\\
+\texttt{git diff} & Unstaged changes\\
+\texttt{git diff --staged} & Exact changes proposed for the next commit\\
+\texttt{git log --oneline -5} & Recent commits\\
+\texttt{git remote -v} & Remote names and URLs; check for credentials before sharing\\
+\bottomrule
+\end{longtable}
+Commits are deliberate snapshots, not automatic backups of every edit.
+
+\section{Local practice lab}\label{sec:local-lab}
+Work in a new writable directory \textbf{outside the workshop repository}:
+\begin{lstlisting}
+mkdir physics-git-practice
+cd physics-git-practice
+git init -b main
+\end{lstlisting}
+If an older Git does not support \texttt{-b}, use \texttt{git init} followed
+by \texttt{git branch -M main}.
+Create \texttt{README.md} in your editor:
+\begin{lstlisting}
+# Pendulum lab
+We will measure the period of a pendulum.
+\end{lstlisting}
+Then run:
+\begin{lstlisting}
+git status
+git add README.md
+git diff --staged
+git commit -m "Describe the pendulum experiment"
+\end{lstlisting}
+Add a second sentence about recording units, then:
+\begin{lstlisting}
+git diff
+git add README.md
+git diff --staged
+git commit -m "Record the measurement units"
+git log --oneline -5
+git status
+\end{lstlisting}
+\textbf{Success:} two commits, a clean working tree, and an explanation of the
+second change. If identity is missing, configure it as above and retry the commit.
+
+\section{Ignore generated and private files}
+Create \texttt{.gitignore} in your \emph{practice repository}:
+\begin{lstlisting}
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.env
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.blg
+\end{lstlisting}
+Do not blindly ignore all PDFs or CSVs. Selected release PDFs and small public
+datasets can be intentional deliverables. This workshop keeps deliverable
+PDFs but excludes temporary LaTeX build state.
+
+Ignoring affects untracked files only: it does not remove tracked files or
+erase history. Do not treat it as secret protection.
+Stage named files rather than immediately running \texttt{git add .};
+review \texttt{git status} and \texttt{git diff --staged} for private data,
+large output, and unrelated changes.
+
+\section{Publish your own project}
+Create an \textbf{empty} GitHub repository for this route: do not initialise it
+with a README, licence, or ignore file. Replace the URL placeholders:
+\begin{lstlisting}
+git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
+git remote -v
+git push -u origin main
+\end{lstlisting}
+To work on an \emph{existing} project instead, run \texttt{git clone URL}
+in its parent directory. Do not initialise inside an existing clone.
+A ZIP download supplies files but no Git history.
+
+\section{Branches and pull requests}
+From a clean working tree in your practice repository:
+\begin{lstlisting}
+git switch -c improve-method
+\end{lstlisting}
+Edit the README, inspect the diff, then:
+\begin{lstlisting}
+git add README.md
+git commit -m "Explain how the period is measured"
+git push -u origin improve-method
+\end{lstlisting}
+On GitHub open a pull request into \texttt{main}. Explain purpose, changes,
+and checks. Ask a partner to review; after merging:
+\begin{lstlisting}
+git switch main
+git pull --ff-only
+\end{lstlisting}
+Without a remote, practise locally using \texttt{git switch main} and
+\texttt{git merge improve-method} instead. Do not blindly combine both routes.
+Update before beginning new shared work. Commit or deliberately stash unfinished
+work before switching context. Never force-push to fix a beginner sync problem.
+
+\section{Merge conflict practice}
+Use only the disposable repository, starting clean:
+\begin{enumerate}
+\item Create \texttt{conflict-demo} with \texttt{git switch -c conflict-demo}.
+\item Change an existing README sentence and commit it.
+\item Switch to \texttt{main}; change that same sentence differently and commit.
+\item Run \texttt{git merge conflict-demo}. Read the conflict message.
+\item Replace the \texttt{<<<<<<<}, \texttt{=======}, and
+\texttt{>>>>>>>} block with the intended final text.
+\item Review the whole result, run \texttt{git add README.md}, then
+\texttt{git commit}.
+\item Check \texttt{git status} and
+\texttt{git log --oneline --graph --all}.
+\end{enumerate}
+To cancel the unfinished practice merge, use \texttt{git merge --abort}.
+Beginning clean makes this straightforward.
+
+\section{Safe recovery}
+\begin{description}
+\item[Accidentally staged:] After the first commit,
+\texttt{git restore --staged FILE} unstages without changing the working copy.
+\item[Revert commit:] Starting clean, \texttt{git revert ID} adds an inverse
+commit; resolve conflicts if needed.
+\item[Need old content:] Inspect \texttt{git show COMMIT\_ID:path/to/file}
+first; copy what you need deliberately.
+\item[Stash work:] \texttt{git stash push -u} includes untracked files, not
+ignored ones. Later use \texttt{git stash apply}, inspect, then drop the
+intended stash.
+\end{description}
+\texttt{git restore FILE} discards uncommitted edits: it is not the same as
+unstaging. Hard reset, clean, and force-push can destroy work and are not
+part of the beginner lab. Git cannot usually recover edits it never recorded.
+
+\section{Troubleshooting and privacy}
+\begin{description}
+\item[Push rejected:] Read the error, check branch/remote, and fetch.
+Do not immediately force-push.
+\item[Branches diverged:] Use \texttt{git fetch origin}, inspect
+\texttt{git log --oneline --graph --all}, and agree on a merge/rebase policy.
+\item[Identity unknown:] Configure author name/email, not login credentials.
+\item[Authentication fails:] Check the credential manager or SSH setup without
+displaying secrets on the projector.
+\item[Secret committed:] Revoke/rotate immediately. Deleting it in a later
+commit does not erase history; follow your organisation's incident procedure.
+\end{description}
+Keep passwords, tokens, private student details, and confidential research
+data out of public repositories. Git alone is not an independent backup.
+
+\section{Further reading}
+Read \href{https://git-scm.com/book/en/v2}{Pro Git},
+\href{https://git-scm.com/docs}{the Git reference}, and
+\href{https://skills.github.com/}{GitHub Skills}.
+\end{document}

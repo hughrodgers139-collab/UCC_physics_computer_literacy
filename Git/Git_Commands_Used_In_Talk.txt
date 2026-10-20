@@ -1,0 +1,106 @@
+# hastage means optional
+
+Make local repo
+
+    git init                    -- initialse a git repo locally on computer, this will show up as a .git folder
+
+    echo "Read me file initialse" > README.md           -- make README file for repo
+
+    git add .                                           -- this will stage you files 
+
+    git commit -m "commit message here"                 -- makes first commit, locally
+
+    touch .gitignore                                    -- makes .gitignore file
+    git add .gitignore                                  -- use .gitignore
+
+    # git config--global init.defaultBranch main        -- makes the main the defaultBranch
+
+    # git remote -v             -- verify repo is fully local
+
+    # ls -la .git               -- all version history on disk
+
+    # git status                -- shows the current directory and current branch changes
+
+
+
+Make local branch 
+
+    git branch                  -- displays branchs
+
+    git branch NewBranch        -- makes new branch named "NewBranch"
+
+    git switch NewBranch        -- switches to new branch called NewBranch
+
+    git branch                  -- verify which branch you are on
+
+    git branch -d - NewBranch   -- remove branch named NewBranch
+
+    git branch -D - NewBranch   -- force remove branch named NewBranch
+
+    git branch -d - NewBranch   -- remove branch named NewBranch
+
+
+
+Merge Branch to other branch
+
+    git branch                  -- list branches
+    
+    git switch PrimaryBranch    -- change to the branch in which you would like to add another branch too
+
+    git merge SecondaryBranch   -- merge the two branches together
+
+
+
+Make .venv
+
+    python3 -m venv .venv_name          -- initialse venv
+
+    source .venv_name/bin/activate      -- enter venv
+
+    pip install numpy                   -- install packages
+    pip install requirements.txt        -- same but in bulk
+
+    deactivate                          exit venv
+
+
+
+Link GitHub repo, Make the repo online...
+
+    git remote add "https:// ... /YourRepo.git"     -- add that page as a repo
+
+    Some verification is then nesisary 
+
+    git remote -v                                   -- test if it worked
+
+    git push -u origin master                       -- push files to github
+
+
+
+Push branch to GitHub
+
+    git switch NewBranch
+
+    git push -u origin NewBranch    -- first time for a specific branch 
+
+    # git push                        -- anytime after that    
+
+    # git push --all origin           -- push all branches
+
+    # git branch -vv                  -- shows each local branch's upstream
+
+    # git push origin --delete feature-x      -- delete branch on github, not locally
+
+
+
+Pull from github
+
+    git pull origin branch_name     -- for specific branch
+
+    # git pull                        -- update local with github version 
+    
+    
+   
+   
+   
+   
+   git remote get-url origin	-- remove link

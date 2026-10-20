@@ -1,0 +1,334 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\title{LaTeX for Physics\\Reports, Equations, Figures, and References}
+\author{UCC Physics Society}
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{One shared document-writing guide}
+LaTeX turns plain-text source into a typeset document. Edit \texttt{.tex},
+not the generated PDF. The syntax is the same on Windows, macOS, and Linux;
+installation is in the OS guides. Use LaTeX for equations, consistent structure,
+cross-references, and bibliographies rather than arranging every page manually.
+For an official introduction and reference material, see the
+\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf
+LaTeX introduction} and the
+\href{https://www.latex-project.org/help/documentation/}{LaTeX Project
+documentation}.
+
+\section{Overleaf or local TeX?}
+\begin{description}
+\item[Overleaf:] Browser-based compilation and collaboration without installing
+a local TeX distribution. Requires network/account; check sharing settings.
+\item[Local editor and TeX:] Offline builds and Git-friendly source, with
+separate editor and TeX installations.
+\end{description}
+For a new Overleaf project, use New Project > Blank Project and follow its
+project instructions. Do not upload confidential research without permission.
+For local work, build this guide from the repository root:
+\begin{lstlisting}
+latexmk -cd -pdf -interaction=nonstopmode -halt-on-error LaTeX/LaTeX.tex
+\end{lstlisting}
+The \texttt{latexmk} command runs the necessary LaTeX and BibTeX passes.
+
+\section{Guide and example files}
+This guide is self-contained: copy its entire source into a new \texttt{.tex}
+file or an Overleaf blank project and compile it. No other workshop files
+are required. A local build needs a TeX distribution with the packages listed
+at the top of the source.
+\begin{description}
+\item[\texttt{LaTeX.tex / LaTeX.pdf}:] This guide and its compiled PDF.
+\item[\texttt{ref.bib}:] Optional example bibliography for practising BibTeX.
+\item[\texttt{LaTeX\_meme.png}:] Optional image for practising image inclusion.
+\end{description}
+Files such as \texttt{.aux}, \texttt{.log}, \texttt{.toc}, \texttt{.out},
+\texttt{.fls}, and \texttt{.fdb\_latexmk} are generated build state.
+\texttt{.bbl} is generated bibliography content; \texttt{.synctex.gz} links
+source and PDF positions. Do not edit these by hand.
+
+\section{Text, structure, and lists}
+\begin{lstlisting}
+\section{Method}
+Normal text, \textbf{bold}, and \emph{emphasis}.
+
+A blank line starts a new paragraph.
+\begin{itemize}
+  \item First point.
+  \item Second point.
+\end{itemize}
+\end{lstlisting}
+Commands start with a backslash; required arguments use braces.
+Environments have matching begin/end commands.
+A percent sign starts a source comment. Literal special characters include
+\verb|\%|, \verb|\_|, \verb|\&|, and \verb|\#|.
+Do not make paragraphs with repeated \verb|\\| or align equations using spaces.
+For a local size change, group it: \verb|{\large Larger text}|.
+
+\subsection{Formatting, alignment, and font sizes}
+The original tutorial's formatting examples can be written as:
+\begin{lstlisting}
+\textbf{Bold text}, \textit{italic text}, \underline{underlined text}.
+\begin{center}
+  Centred text.
+\end{center}
+\begin{flushright}
+  Right-aligned text.
+\end{flushright}
+\begin{flushleft}
+  Left-aligned text.
+\end{flushleft}
+{\Huge Very large text}\par
+{\LARGE Larger text}\par
+{\Large Large text}\par
+{\normalsize Normal text}\par
+{\small Small text}\par
+{\footnotesize Footnote-sized text}\par
+{\scriptsize Script-sized text}\par
+{\tiny Tiny text}\par
+\end{lstlisting}
+Braces keep a size declaration local. Prefer the document's normal styles for
+reports rather than manually resizing each paragraph.
+Use \verb|\begin{enumerate}| with \verb|\item| for a numbered list.
+For a two-column section use \verb|\twocolumn| and later \verb|\onecolumn|;
+these commands normally start a new page, so use them deliberately.
+
+\section{Equations and references}
+\begin{lstlisting}
+Inline mathematics: $F=ma$.
+\begin{equation}
+  T = 2\pi\sqrt{\frac{L}{g}}
+  \label{eq:period}
+\end{equation}
+See Equation~\ref{eq:period}.
+\end{lstlisting}
+Numbered equations can be referenced without manually entering their numbers.
+Use \texttt{align} from \texttt{amsmath} for aligned multi-line work:
+\begin{lstlisting}
+\begin{align}
+  F &= ma,\\
+  E &= \frac{1}{2}mv^2.
+\end{align}
+\end{lstlisting}
+Keep units upright, for example \verb|\(L=0.50\,\mathrm{m}\)|.
+For advanced units learn \texttt{siunitx}; check package compatibility
+before adding it to older templates.
+State model assumptions, not just equations.
+
+\subsection{More physics notation}
+These examples preserve the original tutorial's wider mathematical coverage
+using standard \texttt{amsmath}/\texttt{amssymb} notation; the
+\texttt{physics} package is not required.
+\begin{lstlisting}
+E = mc^2
+\left\langle \psi_i \mid \psi_j \right\rangle = \delta_{ij}
+\mathbf{u}\cdot\mathbf{v} = \sum_{i=1}^{n}u_i v_i
+\frac{dy}{dx}, \quad \frac{\partial f}{\partial x}
+\int_0^1 x^2\,dx
+\iiint_V f(x,y,z)\,dx\,dy\,dz
+\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}
+\mathbf{F} = m\mathbf{a}
+\nabla\cdot\mathbf{E} = \frac{\rho}{\epsilon_0}
+c = 2.99792458\times10^8\,\mathrm{m\,s^{-1}}
+\end{lstlisting}
+Put these expressions inside maths delimiters. For example:
+\[
+ \left\langle \psi_i \mid \psi_j \right\rangle=\delta_{ij},
+ \qquad
+ \mathbf{u}\cdot\mathbf{v}=\sum_{i=1}^{n}u_i v_i,
+ \qquad
+ A=\begin{pmatrix}1&2\\3&4\end{pmatrix}.
+\]
+\[
+ \frac{dy}{dx},\qquad
+ \frac{\partial f}{\partial x},\qquad
+ \int_0^1 x^2\,dx,\qquad
+ \iiint_V f(x,y,z)\,dx\,dy\,dz.
+\]
+Use explicit bounds or a named integration domain. The small space
+\verb|\,| before a differential improves readability.
+For structured unit formatting, the optional
+\href{https://ctan.org/pkg/siunitx}{siunitx} package provides \verb|\SI|.
+
+\subsection{Source-code listings}
+Use \texttt{listings} to typeset code rather than inserting a screenshot.
+The following example demonstrates the source of a listing:
+\begin{lstlisting}[escapechar=|]
+\begin{lstlisting}[language=Python]
+import numpy as np
+x = np.linspace(0, 10, 100)
+print(x)
+|\textbackslash|end{lstlisting}
+\end{lstlisting}
+Follow your module's guidance about including analysis code in an appendix
+or separate repository. Code shown in a listing is not executed by LaTeX.
+
+\section{Figures without fighting floats}
+First generate \texttt{fit\_result.pdf} using the
+\href{../Example_Code/Exersize.ipynb}{Python notebook}. With
+\verb|\usepackage{graphicx}| in the preamble:
+\begin{lstlisting}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics{../Example_Code/fit_result.pdf}
+  \caption{Synthetic position data and a linear model.
+           Error bars show assumed position uncertainty.}
+  \label{fig:fit}
+\end{figure}
+Figure~\ref{fig:fit} compares observations and model.
+\end{lstlisting}
+For Overleaf, upload the figure and change the path to
+\texttt{fit\_result.pdf}. Prefer vector PDF for plots; use suitable raster
+formats for photographs. The path is relative to this guide's directory;
+filenames and case must match. In Overleaf, upload the figure and use its
+project-relative path.
+
+A figure is a \textbf{float}. \texttt{[htbp]} suggests placements, not an exact
+position. Reference the figure in text; do not force every figure with
+\texttt{[H]}. Put the label \emph{after} the caption.
+Captions should explain quantities, units, error bars, and physical meaning.
+See \href{https://www.overleaf.com/learn/latex/Inserting_Images}{Overleaf's
+guide to figures and images}.
+
+\subsection{An image example you can rebuild}
+To practise including an external image, copy the optional
+\texttt{LaTeX\_meme.png} beside your source (or upload it to Overleaf).
+Then try this example:
+\begin{lstlisting}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.45\linewidth]{LaTeX_meme.png}
+  \caption{An existing tutorial image used to demonstrate image inclusion.}
+  \label{fig:tutorial-image}
+\end{figure}
+\end{lstlisting}
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox[c][30mm][c]{0.45\linewidth}{\centering Example figure}}
+  \caption{A self-contained placeholder demonstrating figure sizing and references.}
+  \label{fig:tutorial-image}
+\end{figure}
+Figure~\ref{fig:tutorial-image} uses a relative width so it scales with the
+text area. The \texttt{[H]} placement option in the old tutorial requires
+\texttt{float}; it prevents floating, so use it only when genuinely necessary.
+
+\section{Tables and citations}
+Use tables for numerical results, with units in headings. \texttt{booktabs}
+provides \verb|\toprule|, \verb|\midrule|, and \verb|\bottomrule|. Round
+results to sensible significant figures.
+
+\begin{lstlisting}
+\begin{table}[htbp]
+  \centering
+  \caption{Illustrative values for practising table layout.}
+  \label{tab:example}
+  \begin{tabular}{rr}
+    \toprule
+    $x$ & $y$ \\
+    \midrule
+    1 & 2 \\
+    2 & 4 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\end{lstlisting}
+
+For a separate BibTeX bibliography, create \texttt{ref.bib} beside your
+source with this entry:
+\begin{lstlisting}
+@misc{overleaf_examples,
+  author = {{Overleaf}},
+  title = {Overleaf LaTeX Examples},
+  year = {2024},
+  howpublished = {\url{https://www.overleaf.com/latex/examples}}
+}
+\end{lstlisting}
+In your document, cite it and print the bibliography with:
+\begin{lstlisting}
+See the examples~\cite{overleaf_examples}.
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{lstlisting}
+The citation key must match the BibTeX entry exactly. See
+\href{https://www.overleaf.com/learn/latex/Bibliography_management_with_bibtex}{Overleaf's
+BibTeX guide} for citation and bibliography syntax.
+Check source metadata and whether the source supports your claim.
+A formatted citation is not proof of correctness.
+For a complete rendered citation example in this guide, see the
+Overleaf examples collection~\cite{overleaf_examples}.
+This guide instead uses an inline \texttt{thebibliography} environment, so
+its source compiles without a separate \texttt{.bib} file or BibTeX.
+Do not combine the two bibliography approaches in the same document.
+For a clickable external link, use
+\verb|\href{URL}{link text}|.
+
+\section{A useful lab-report structure}
+\begin{enumerate}
+\item Aim and physical model, including assumptions.
+\item Method, instrument calibration, and data collection.
+\item Results with units and clear figures/tables.
+\item Uncertainties, residuals, systematic effects, and limitations.
+\item Conclusion supported by measurements.
+\item References and appropriate supplementary analysis/code.
+\end{enumerate}
+Follow your module's rubric when it differs.
+
+\section{Exercises and checks}
+\begin{enumerate}
+\item Change the title/author and rebuild; confirm the PDF changed.
+\item Add a labelled equation and refer to it without typing its number.
+\item Add a table row, clearly marking real versus synthetic data.
+\item Insert the Python plot and write a meaningful caption.
+\item Add a real source, cite it, and rebuild without question marks.
+\item Reorder two figures and check that references still follow them.
+\end{enumerate}
+
+\section{Troubleshooting}
+\begin{description}
+\item[No PDF:] Read the first error, not just the last summary.
+\item[Undefined control sequence:] Check spelling and required packages.
+\item[Missing dollar inserted:] Check maths delimiters and ordinary-text underscores.
+\item[Figure missing:] Check working directory, filename/case, and whether
+the figure was generated.
+\item[Citation question mark:] Check keys, bibliography name, BibTeX, and
+two further LaTeX passes when using BibTeX. For this guide's inline
+bibliography, rerun LaTeX to resolve citations.
+\item[Figure moved:] This is normal float behaviour; use cross-references.
+\item[Overfull box:] Inspect the PDF; shorten text/URLs or restructure maths.
+\item[Missing package:] Use the TeX distribution manager or Overleaf;
+an editor extension is not TeX itself.
+\end{description}
+Further reference:
+\href{https://www.overleaf.com/learn}{Overleaf learning resources} and
+\href{https://www.latex-project.org/help/documentation/}{LaTeX documentation}.
+\begin{thebibliography}{1}
+\bibitem{overleaf_examples}
+Overleaf.
+\emph{Overleaf LaTeX Examples}.
+2024.
+\url{https://www.overleaf.com/latex/examples}.
+\end{thebibliography}
+\end{document}

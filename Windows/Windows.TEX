@@ -1,0 +1,184 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\title{Windows Computer Literacy\\Setup and Everyday Reference}
+\author{Hugh Rodgers}
+\begin{document}
+\maketitle
+
+\LARGE{IF YOU FIND ANY COMMANDS OR INFORMATION ARE INCORRECT PLEASE LET ME KNOW, 123340696@umail.ucc.ie, I DONT USE WINDOWS SO I CANT VERIFY EVERYTHING}
+\tableofcontents
+
+\section{Install VS Code or VSCodium}
+  Choose one editor. 
+  The VS Code \href{https://code.visualstudio.com/docs/setup/windows}{User Setup} or VSCodium \href{https://vscodium.com/#install}{official installation options}; 
+  Or use WinGet to install either editor.
+  Winget install vscode --source winget.
+  Winget install vscodium --source winget.
+
+\section{Install the shared tools}
+  \begin{itemize}
+
+    \item Install Python following the instructions at \href{https://www.python.org/downloads/windows/}{official Windows downloads} 
+    or with PowerShell using "winget install Python.Python.3.14".
+
+    \item Install Git following the instructions at \href{https://git-scm.com/download/win}{the official Git downloads} 
+    or with PowerShell using "winget install --id Git.Git -e --source winget".
+
+    \item I have found many people have trouble with LaTeX in vscode on windows, i would still recomend this as it keeps all your things in one place.
+    you can try \href{https://miktex.org/howto/install-miktex}{MiKTeX} or \href{https://tug.org/texlive/}{TeX Live}. 
+    If none of this works and you dont care to install a local TeX distribution, use Overleaf is a browser alternative, this will cause problems down the line when you have longer document and it begins to ask for money.
+    Other dedicated programs are available as well but i have no experience with them.
+  \end{itemize}
+
+  After installation you should verify that the tools are correctly installed by checking their versions.
+  Close and reopen PowerShell after installation and type the following commands to check the versions of the installed tools.
+
+  \begin{lstlisting}
+    py --version
+    git --version
+    Get-Location
+  \end{lstlisting}
+  If \texttt{py} is unavailable but \texttt{python --version} identifies the installed interpreter, use \texttt{python} in the environment commands below.
+  You may have to write python3 instead of python depending on the version
+\newpage
+
+
+\section{PowerShell, projects, and paths}
+This is for PowerShell (Windows Terminal), not Command Prompt,
+Git Bash, or WSL, for these instructions. A terminal runs a shell to navigate
+folders and start programs. Relative paths begin from the current working
+directory. In File Explorer, enable filename extensions so a source file does
+not accidentally become \texttt{report.tex.txt}. Keep projects in a writable
+user folder.
+
+\begin{lstlisting}
+pendulum-lab/
+  README.md
+  requirements.txt
+  data/
+    raw_measurements.csv
+  analysis/
+    analysis.py
+    analysis.ipynb
+  figures/
+  report/
+    report.tex
+\end{lstlisting}
+
+\begin{longtable}{p{0.50\linewidth}p{0.64\linewidth}}
+\toprule Task & PowerShell command\\ \midrule
+Current directory & \texttt{Get-Location} (alias: \texttt{pwd})\\
+List files, including hidden & \texttt{Get-ChildItem -Force}\\
+Move to the different directory & \texttt{Set-Location "DirectoryFilePath"}\\
+Enter a path with spaces & \texttt{Set-Location "My Project"}\\
+Copy a file & \texttt{Copy-Item source.csv copy.csv}\\
+Move a file & \texttt{Move-Item copy.csv data.csv}\\
+Find CSV files & \texttt{Get-ChildItem -Filter *.csv -Recurse}\\
+Search file text & \texttt{Select-String -Path notes.txt -Pattern time}\\
+Open the current folder & \texttt{Start-Process .}\\
+Open the folder in the editor & \texttt{"code ."} or \texttt{"codium ."}\\
+\bottomrule
+\end{longtable}
+Inspect paths before copying or moving files: an existing destination may be
+overwritten. Use File Explorer's Recycle Bin when removing files. If the
+editor command is unavailable, use File > Open Folder.
+For more on PowerShell's file and directory commands, see Microsoft's
+\href{https://learn.microsoft.com/en-us/powershell/}{working
+with files and folders guide}.
+
+\section{Python and project environments}
+From the project directory, create a virtual environment and install packages using its interpreter:
+\begin{lstlisting}
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install numpy pandas matplotlib etc
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -c "import sys; print(sys.executable)"
+\end{lstlisting}
+The printed path should include \texttt{.venv}. Optional PowerShell
+activation is:
+\begin{lstlisting}
+.\.venv\Scripts\Activate.ps1
+\end{lstlisting}
+After activation, use \texttt{python -m pip ...}; run \texttt{deactivate} to
+leave the environment. If activation is blocked, call the environment's
+Python executable directly rather than weakening the execution policy.
+A virtual environment keeps project packages separate; it is not a security
+sandbox, and it should not be committed or copied to another computer. See the
+\href{https://docs.python.org/3/library/venv.html}{Python virtual-environment
+documentation}.
+
+\section{Git and LaTeX}
+Git works locally; GitHub hosts online copies and collaboration. Saving a file
+is not the same as committing it, and a commit is not the same as pushing it.
+For the shared commands and safe workflow, see the
+\href{../Git/Git.pdf}{Git and GitHub guide}.
+
+LaTeX source (\texttt{.tex}) is compiled into a PDF. Use Overleaf in a browser
+or install MiKTeX/TeX Live for local builds. From the repository root, build
+this handout with:
+\begin{lstlisting}
+latexmk -cd -pdf -interaction=nonstopmode -halt-on-error Windows/Windows.TEX
+\end{lstlisting}
+The shared \href{../LaTeX/LaTeX.pdf}{LaTeX guide} covers report structure,
+equations, figures, and references; see also the
+\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf
+LaTeX introduction} and
+\href{https://www.latex-project.org/help/documentation/}{LaTeX Project
+documentation}.
+
+\section{Shortcuts and PowerShell profile}
+\begin{itemize}
+\item \texttt{Ctrl+C} interrupts a command; \texttt{Tab} completes paths;
+\texttt{Up} recalls command history.
+\item Windows Terminal commonly uses \texttt{Ctrl+Shift+C/V} for copy/paste.
+\item \texttt{Win+E} opens File Explorer; \texttt{Win+Left/Right} tiles a
+window to the side.
+\end{itemize}
+
+PowerShell reads a profile script when it starts. Display its location with
+\verb|$PROFILE|. Create the parent folder and file only if needed, then open
+the profile in Notepad:
+\begin{lstlisting}
+New-Item -ItemType Directory -Path (Split-Path -Parent $PROFILE) -Force | Out-Null
+if (!(Test-Path -Path $PROFILE)) {
+  New-Item -ItemType File -Path $PROFILE | Out-Null
+}
+notepad $PROFILE
+\end{lstlisting}
+Add personal shortcuts, save, and load them into the current session with
+\begin{lstlisting}
+function ll { Get-ChildItem -Force }
+function croot { Set-Location $HOME }
+. $PROFILE
+\end{lstlisting}
+Back up and review your profile before editing it. Bash aliases from
+\texttt{.bashrc} do not automatically work in PowerShell. See Microsoft's
+\href{https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles}{PowerShell
+profile documentation}.
+
+
+\noindent For Python, fitting, and data-analysis exercises, use the
+\href{../Example_Code/Exersize.ipynb}{shared exercise notebook}.
+\end{document}
