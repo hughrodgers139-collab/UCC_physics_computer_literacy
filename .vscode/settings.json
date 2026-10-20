@@ -1,0 +1,28 @@
+// VS Code settings for excluding certain file types from the workspace
+{
+  "files.exclude": {
+    "**/*.{log,aux,out,fls,fdb_latexmk,bbl,blg,toc,nav,snm,vrb}": true, 
+    "**/*.synctex.gz": true 
+  },
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-cd",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk",
+      "tools": ["latexmk"]
+    }
+  ],
+  "latex-workshop.latex.recipe.default": "latexmk"
+}

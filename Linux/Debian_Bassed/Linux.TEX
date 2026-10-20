@@ -1,0 +1,195 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\title{Debian based Computer Literacy\\Setup and Everyday Reference}
+\author{Hugh Rodgers}
+\begin{document}
+\maketitle
+
+\section{Install VS Code or VSCodium}
+Choose one editor. For VS Code, download the Debian package from the
+\href{https://code.visualstudio.com/docs/setup/linux}{official Linux setup
+guide} and install it with the graphical software centre or the command shown
+there or run sudo apt install ./vscode.deb. 
+For VSCodium, follow the\href{https://vscodium.com/#install}{official installation options}; choose
+the package source for your distribution. On a managed computer, follow
+university policy before installing software.
+
+\section{Install the shared tools}
+On Debian or Ubuntu, update the package list and install Python, its virtual
+environment and package tools, and Git:
+\begin{lstlisting}
+sudo apt update
+sudo apt install git python3 python3-venv python3-pip
+\end{lstlisting}
+For a local LaTeX installation, add the compiler and workshop packages:
+\begin{lstlisting}
+sudo apt install latexmk texlive-latex-recommended texlive-latex-extra texlive-pictures
+\end{lstlisting}
+Review package-manager changes before confirming. Do not make system changes
+on a managed university computer without permission. These package names and
+commands are for Debian-based systems; other distributions use different
+package managers. See the
+\href{https://www.debian.org/doc/manuals/debian-reference/ch02.en.html}{Debian
+package-management documentation},
+\href{https://www.python.org/downloads/}{Python downloads},
+\href{https://git-scm.com/download/linux}{Git for Linux}, and
+\href{https://tug.org/texlive/}{TeX Live documentation}.
+Overleaf is a browser-based alternative to installing TeX locally.
+
+\begin{lstlisting}
+python3 --version
+git --version
+pwd
+\end{lstlisting}
+
+\tableofcontents
+\newpage
+
+\section{Terminal, projects, and paths}
+The terminal runs a shell, which accepts commands to navigate folders and
+start programs. A project is an organised directory; relative paths begin
+from the current working directory. Linux filenames are case-sensitive, and
+hidden names begin with a dot, such as \texttt{.venv} and \texttt{.git}.
+Quote paths that contain spaces.
+
+\begin{lstlisting}
+pendulum-lab/
+  README.md
+  requirements.txt
+  data/
+    raw_measurements.csv
+  analysis/
+    analysis.py
+    analysis.ipynb
+  figures/
+  report/
+    report.tex
+\end{lstlisting}
+
+\begin{longtable}{p{0.29\linewidth}p{0.64\linewidth}}
+\toprule Task & Bash command\\ \midrule
+Current directory & \texttt{pwd}\\
+List files, including hidden & \texttt{ls -la}\\
+Move to the parent directory & \texttt{cd ..}\\
+Enter a path with spaces & \texttt{cd "My Project"}\\
+Copy / move a file & \texttt{cp source.csv copy.csv} / \texttt{mv copy.csv data.csv}\\
+Find CSV files & \texttt{find . -name '*.csv'}\\
+Search file text & \texttt{grep -n 'time' notes.txt}\\
+Open the current folder & \texttt{xdg-open .}, on a desktop system\\
+Open the folder in the editor & \texttt{code .} or \texttt{codium .}\\
+\bottomrule
+\end{longtable}
+Inspect paths before copying or moving files: an existing destination may be
+overwritten. Prefer the file manager's Trash when removing files.
+Command behaviour is documented in the
+\href{https://www.gnu.org/software/coreutils/manual/coreutils.html}{GNU
+Coreutils manual} and the
+\href{https://www.gnu.org/software/findutils/manual/html_mono/find.html}{GNU
+Findutils manual}.
+
+\section{Python and project environments}
+Create one virtual environment in the project directory containing
+\texttt{requirements.txt}. Install project packages inside it, not into the
+operating system's Python:
+\begin{lstlisting}
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip check
+python -c "import sys; print(sys.executable)"
+deactivate
+\end{lstlisting}
+The printed interpreter path should include \texttt{.venv}. A virtual
+environment keeps project packages separate; it is not a security sandbox,
+and it should not be committed or copied to another computer. See the
+\href{https://docs.python.org/3/library/venv.html}{Python virtual-environment
+documentation}. If creating one reports a missing \texttt{ensurepip}, install
+the matching distribution package with administrator permission. Do not use
+\texttt{sudo pip} or bypass the distribution's externally-managed Python
+protection.
+
+\section{Git and LaTeX}
+Git works locally; GitHub hosts online copies and collaboration. Saving a file
+is not the same as committing it, and a commit is not the same as pushing it.
+For the shared commands and safe workflow, see the
+\href{../../Git/Git.pdf}{Git and GitHub guide}.
+
+LaTeX source (\texttt{.tex}) is compiled into a PDF. Use Overleaf in a browser
+or compile locally with the TeX Live installation above. From the repository
+root, build this handout with:
+\begin{lstlisting}
+latexmk -cd -pdf -interaction=nonstopmode -halt-on-error Linux/Debian_Bassed/Linux.TEX
+\end{lstlisting}
+The shared
+\href{../../LaTeX/LaTeX.pdf}{LaTeX guide} covers report structure, equations,
+figures, and references; see also the
+\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf
+LaTeX introduction} and
+\href{https://www.latex-project.org/help/documentation/}{LaTeX Project
+documentation}.
+
+\section{Shortcuts and Bash configuration}
+\begin{itemize}
+\item \texttt{Ctrl+C} interrupts the running command; \texttt{Ctrl+D} ends
+input or exits an empty shell.
+\item \texttt{Tab} completes paths; \texttt{Up} recalls command history;
+\texttt{Ctrl+R} searches Bash history.
+\item \texttt{Ctrl+Shift+C/V} copies and pastes in many Linux terminal
+applications. Desktop shortcuts can vary.
+\end{itemize}
+
+Bash reads \texttt{\textasciitilde/.bashrc} for interactive non-login
+terminals. To add personal shortcuts, open that file in a text editor and
+append simple aliases such as:
+\begin{lstlisting}
+alias ll='ls -lah'
+alias croot='cd ~'
+\end{lstlisting}
+Save the file, then load the changes in the current terminal:
+\begin{lstlisting}
+source ~/.bashrc
+\end{lstlisting}
+Back up and review your own file before editing it. Never replace it wholesale
+with another person's configuration. See the
+\href{https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html}{Bash
+startup-file documentation}.
+
+\section{Troubleshooting}
+\begin{description}
+\item[Command not found:] Check that the tool is installed and reopen the
+terminal after installation.
+\item[Permission required:] Check university policy; do not use administrator
+privileges as a general fix.
+\item[Python package installation is blocked:] Create and activate the
+project's virtual environment.
+\item[File not found:] Check \texttt{pwd}, filename case, and the relative path.
+\item[No graphical window over SSH:] The remote machine may not have a display.
+\item[LaTeX package missing:] Use the TeX distribution's package manager or
+Overleaf; an editor extension is not a TeX distribution.
+\end{description}
+
+\noindent For Python, fitting, and data-analysis exercises, use the
+\href{../../Example_Code/Exersize.ipynb}{shared exercise notebook}.
+\end{document}

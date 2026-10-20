@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false
+}
+\title{macOS Computer Literacy\\Setup and Everyday Reference}
+\author{UCC Physics Society}
+\begin{document}
+\maketitle
+
+\LARGE{IF YOU FIND ANY COMMANDS OR INFORMATION ARE INCORRECT PLEASE LET ME KNOW, 123340696@umail.ucc.ie, I DONT USE MAC SO I CANT VERIFY EVERYTHING}
+
+\tableofcontents
+\section{Install VS Code or VSCodium}
+Choose one editor. For VS Code, download the disk image and move
+\texttt{Visual Studio Code.app} to Applications using the
+\href{https://code.visualstudio.com/docs/setup/mac}{official macOS setup
+guide}. For VSCodium, follow the
+\href{https://vscodium.com/#install}{official installation options}; the
+Homebrew command is available if Homebrew is already installed. Neither
+Homebrew nor an administrator account is required for this workshop.
+
+\section{Install the shared tools}
+\begin{itemize}
+\item Install Python from the
+\href{https://www.python.org/downloads/macos/}{official Python macOS
+downloads}. Use \texttt{python3}; do not modify Apple-managed system files.
+\item Run \texttt{git --version}. If macOS offers to install Command Line
+Tools, follow Apple's prompt; full Xcode is not required just to use Git.
+\item For local LaTeX, install
+\href{https://tug.org/mactex/}{MacTeX}. It is a large download; Overleaf is a
+browser alternative.
+\end{itemize}
+These vendor pages provide current installation choices:
+\href{https://git-scm.com/download/mac}{Git for macOS},
+\href{https://brew.sh/}{Homebrew}, and
+\href{https://tug.org/texlive/}{TeX Live}. Homebrew is optional, not a
+prerequisite. After installing MacTeX, reopen Terminal before checking
+\texttt{pdflatex --version} and \texttt{latexmk -v}.
+
+\begin{lstlisting}
+python3 --version
+git --version
+pwd
+\end{lstlisting}
+
+
+\newpage
+
+\section{Terminal, projects, and paths}
+Open Terminal from Spotlight. Recent macOS versions use \textbf{zsh} by
+default. The terminal runs a shell to navigate folders and start programs.
+Relative paths begin from the current working directory. Finder's
+\texttt{Command+Shift+G} opens a path; \texttt{Command+Shift+.} toggles hidden
+files. Treat filenames as case-sensitive for portable work.
+
+\begin{lstlisting}
+pendulum-lab/
+  README.md
+  requirements.txt
+  data/
+    raw_measurements.csv
+  analysis/
+    analysis.py
+    analysis.ipynb
+  figures/
+  report/
+    report.tex
+\end{lstlisting}
+
+\begin{longtable}{p{0.30\linewidth}p{0.63\linewidth}}
+\toprule Task & Terminal command\\ \midrule
+Current directory & \texttt{pwd}\\
+List files, including hidden & \texttt{ls -la}\\
+Move to the parent directory & \texttt{cd ..}\\
+Go to your home folder & \texttt{cd \textasciitilde}\\
+Enter a path with spaces & \texttt{cd "My Project"}\\
+Copy / move a file & \texttt{cp source.csv copy.csv} / \texttt{mv copy.csv data.csv}\\
+Find CSV files & \texttt{find . -name '*.csv'}\\
+Search file text & \texttt{grep -n 'time' notes.txt}\\
+Open the current folder in Finder & \texttt{open .}\\
+Open the folder in the editor & \texttt{code .} or \texttt{codium .}\\
+\bottomrule
+\end{longtable}
+Inspect paths before copying or moving files: an existing destination may be
+overwritten. Prefer Finder's Trash when removing files. If the editor command
+is unavailable, use File > Open Folder or install its shell command from the
+editor's Command Palette.
+See Apple's
+\href{https://support.apple.com/guide/terminal/welcome/mac}{Terminal User
+Guide} for opening Terminal, working with windows, and using commands.
+
+\section{Python and project environments}
+Create one virtual environment in the project directory containing
+\texttt{requirements.txt}. Install project packages inside it:
+\begin{lstlisting}
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip check
+python -c "import sys; print(sys.executable)"
+deactivate
+\end{lstlisting}
+The printed interpreter path should include \texttt{.venv}. A virtual
+environment keeps project packages separate; it is not a security sandbox,
+and it should not be committed or copied to another computer. See the
+\href{https://docs.python.org/3/library/venv.html}{Python virtual-environment
+documentation}. Activation applies only to the current terminal.
+
+\section{Git and LaTeX}
+Git works locally; GitHub hosts online copies and collaboration. Saving a file
+is not the same as committing it, and a commit is not the same as pushing it.
+For the shared commands and safe workflow, see the
+\href{../Git/Git.pdf}{Git and GitHub guide}.
+
+LaTeX source (\texttt{.tex}) is compiled into a PDF. Use Overleaf in a browser
+or install MacTeX for local builds. From the repository root, build this
+handout with:
+\begin{lstlisting}
+latexmk -cd -pdf -interaction=nonstopmode -halt-on-error MacOS/MaxOS.TEX
+\end{lstlisting}
+The shared \href{../LaTeX/LaTeX.pdf}{LaTeX guide} covers report structure,
+equations, figures, and references; see also the
+\href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{Overleaf
+LaTeX introduction} and
+\href{https://www.latex-project.org/help/documentation/}{LaTeX Project
+documentation}.
+
+\section{Shortcuts and zsh configuration}
+\begin{itemize}
+\item \texttt{Ctrl+C} interrupts a terminal command; \texttt{Tab} completes
+paths; \texttt{Up} recalls command history.
+\item \texttt{Command+C/V} copies and pastes in standard macOS applications.
+\item \texttt{Command+Space} opens Spotlight; \texttt{Command+Tab} switches
+applications.
+\end{itemize}
+
+zsh reads \texttt{\textasciitilde/.zshrc} for interactive shells. To add
+personal shortcuts, open the file in a text editor and append simple aliases:
+\begin{lstlisting}
+alias ll='ls -lah'
+alias croot='cd ~'
+\end{lstlisting}
+Save the file, then load the changes in the current terminal:
+\begin{lstlisting}
+source ~/.zshrc
+\end{lstlisting}
+Back up and review your own file before editing it. Bash configuration is
+different; do not copy a Linux \texttt{.bashrc} wholesale. See the
+\href{https://zsh.sourceforge.io/Doc/Release/Files.html}{zsh startup-file
+documentation}.
+
+\section{Troubleshooting}
+\begin{description}
+\item[Python command missing:] Use \texttt{python3} and check that the
+official installer completed.
+\item[Editor command missing:] Use File > Open Folder or install the
+editor's shell command, then restart Terminal.
+\item[Python package installation is blocked:] Check that the project
+environment is active.
+\item[File not found:] Check \texttt{pwd}, filename case, and the relative path.
+\item[TeX command missing:] Reopen Terminal after installing MacTeX; consult
+its official installation instructions before changing paths.
+\item[Application blocked:] Verify its source and university policy; do not
+disable macOS security globally.
+\end{description}
+
+\noindent For Python, fitting, and data-analysis exercises, use the
+\href{../Example_Code/Exersize.ipynb}{shared exercise notebook}.
+\end{document}
