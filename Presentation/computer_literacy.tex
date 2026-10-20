@@ -1,0 +1,290 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetheme{Boadilla}
+\usecolortheme{dove}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamersize{text margin left=9mm,text margin right=9mm}
+
+\definecolor{slidebg}{HTML}{F5F8FC}
+\definecolor{slideaccent}{HTML}{287C8E}
+\setbeamercolor{background canvas}{bg=slidebg}
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[slidebg] (current page.south west) rectangle (current page.north east);
+    \fill[slideaccent!65] (current page.south west)
+      rectangle ([xshift=2mm]current page.north west);
+    \coordinate (orbit) at ([xshift=-8mm,yshift=-7mm]current page.north east);
+    \draw[slideaccent!15,line width=1pt] (orbit) circle (2.5cm);
+    \draw[slideaccent!12,line width=1pt] (orbit) circle (3.1cm);
+    \fill[slideaccent!25] ([xshift=-8mm,yshift=-7mm]current page.north east)
+      circle (2pt);
+    \fill[slideaccent!25] ([xshift=-33mm,yshift=-7mm]current page.north east)
+      circle (1.5pt);
+    \fill[slideaccent!25] ([xshift=-8mm,yshift=-38mm]current page.north east)
+      circle (1.5pt);
+  \end{tikzpicture}%
+}
+
+\newcommand{\commandbar}[3]{%
+  \vfill
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textcolor{red}{\textbf{Linux}}\\
+      \scriptsize #1
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textcolor{green!50!black}{\textbf{macOS}}\\
+      \scriptsize #2
+    \end{column}
+    \begin{column}{0.32\textwidth}
+      \centering
+      \textcolor{blue}{\textbf{Windows}}\\
+      \scriptsize #3
+    \end{column}
+  \end{columns}
+}
+
+\title{Ya sure, I can make a presentation: Computer literacy for physics}
+\institute{UCC Physics Society}
+\date{[Click to add subtitle]}
+\hypersetup{pdftitle={Ya sure, I can make a presentation: Computer literacy for physics},pdfauthor={Hugh Rodgers}}
+\pdfstringdefDisableCommands{\def\translate#1{#1}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+\begin{frame}{Learning outcomes}
+  \begin{enumerate}
+    \item Use the terminal and shell or whatever.
+    \item Create a project and understand a file path and folders.
+    \item Install and run python and pip. 
+    \item Create Python environment for the project for your project.
+    \item Use Git/GitHub to save project history.
+    \item Use LateX either in vscode/codium, overleaf or another compiler.
+    \item Install the Linux Terminal.
+  \end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}{Different Operating Systems}
+  \begin{itemize}
+    \item Windows: PowerShell, Python, Git, and an editor.
+    \item macOS: Terminal/zsh, Python, Git, and an editor.
+    \item Debian based: terminal, Python, Git, and an editor.
+    \item LaTeX: Overleaf in a browser or a local TeX distribution.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Using the terminal/shell and understanding file paths}
+  \begin{center}
+    Terminal $\longrightarrow$ User $\longrightarrow$ Folders
+    $\longrightarrow$ Files
+  \end{center}
+  \begin{itemize}
+    \item The terminal allows you to interact with the shell and navigate the file system.
+    \item A file system is a hierarchical structure of directories (folders) and files.
+    \item Through the terminal you can run commands and open files.
+    \item You are able to install python and run pip commands to create things.
+    \item There are many other things you can do through the terminal like running code and ssh into remote servers, that will not be covered here.
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]{File paths and directories}
+\begin{verbatim}
+  .       current directory
+  ..      parent directory
+\end{verbatim}
+  \begin{itemize}
+    \item Relative paths start at the process's working directory.
+    \item File names are case-sensitive and please dont put spaces in them it makes it difficult to specify paths.
+    \item Use forward slashes `/` as directory separators for better compatibility across different operating systems.
+    \item cd is the command to "change directory".  
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Virtual environment for Python project}
+  \begin{itemize}
+    \item Create and activate a project environment before installing packages.
+    \item Install packages with pip, then use \texttt{deactivate} when finished.
+  \end{itemize}
+  \commandbar{
+    \texttt{python3 -m venv .venv}\\
+    \texttt{source .venv/bin/activate}\\
+    \texttt{python3 -m pip install numpy}\\
+    \texttt{python3 -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }{
+    \texttt{python3 -m venv .venv}\\
+    \texttt{source .venv/bin/activate}\\
+    \texttt{python3 -m pip install numpy}\\
+    \texttt{python3 -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }{
+    \texttt{py -m venv .venv}\\
+    \texttt{.}\textbackslash{}.venv\textbackslash{}Scripts\textbackslash{}Activate.ps1\\
+    \texttt{python -m pip install numpy}\\
+    \texttt{python -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }
+\end{frame}
+
+
+
+\begin{frame}{Git}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{block}{Git: local history}
+        Commits, branches.\\
+        Works offline.\\
+        Records snapshots.
+      \end{block}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{block}{GitHub: online collaboration}
+        Hosts repositories.\\
+        Collaborates online.\\
+        Is not local .
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{5mm}
+  Save $\ne$ commit $\ne$ push.\\
+  Save is local to your working directory; Commit records a snapshot in the repository; Push updates the remote repository.
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Structure of a project/LabReport}
+\begin{verbatim}
+pendulum-lab/
+    README.md             # this is a brief overview of the project
+    requirements.txt
+    data/                 # this folder contains all the data files
+        raw_measurements.txt
+        raw_measurements_processed.csv
+    analysis/             # code for making graphs and analysis 
+        analysis_script.py
+        analysis_script.ipynb
+    figures/              # neat way of organizing figures
+        Graph.png
+        Graph.jpg
+    report/               # this folder contains the final report
+        report.tex
+        report.pdf
+\end{verbatim}
+\end{frame}
+
+% \begin{frame}{Essential Git Commands}
+%   \small
+%   \begin{itemize}
+%     \item \texttt{git init} — create a repository in the current directory.
+%     \item \texttt{git clone URL} — download an existing repository.
+%     \item \texttt{git status} — check the working tree and staged files.
+%     \item \texttt{git diff} — inspect changes not yet staged.
+%     \item \texttt{git add README.md} — stage a file for the next commit.
+%     \item \texttt{git diff --staged} — inspect the changes to be committed.
+%     \item \texttt{git commit -m "Describe the change"} — save a snapshot with a message.
+%     \item \texttt{git switch -c analysis} — create and switch to a branch called analysis.
+%     \item \texttt{git push -u origin analysis} — publish the branch to the remote repository.
+%     \item \texttt{git pull} — get and integrate remote changes.
+%   \end{itemize}
+%   Typical cycle: check status, inspect changes, stage, review the staged diff, then commit.
+% \end{frame}
+
+
+
+\begin{frame}{LaTeX: describe structure, then build}
+  LaTeX is a typesetting system for producing scientific and technical documents.
+  \begin{itemize}
+    \item \texttt{.tex}: report source.
+    \item \texttt{.bib}: bibliographic records.
+    \item \texttt{.pdf}: generated document.
+  \end{itemize}
+
+  \[
+  \int^\infty_{-\infty} \frac{\phi^* \times \psi}{\sqrt{\text{bread}}} \, \mathrm{d}r = \text{oodles of dough} \times \left\langle \phi | \psi \right\rangle =  1 \text{ or something}
+  \]
+  \[
+    \sigma_f^2 \simeq
+      \sum_i \left(\frac{\partial f}{\partial q_i}\right)^2 \sigma_{q_i}^2.
+  \]
+  \centering
+
+  \begin{tabular}{|c|c|c|}
+    \hline
+    Column 1 & Column 2 & Column 3 \\
+    \hline
+    Entry 1 & Entry 2 & Entry 3 \\
+    Entry 4 & Entry 5 & Entry 6 \\
+    \hline
+  \end{tabular}
+
+\end{frame}
+
+
+
+\begin{frame}{Habits to learn}
+  \begin{enumerate}
+    \item Preserve raw data, units, and provenance.
+    \item Record environment and run instructions.
+    \item Make small commits with meaningful messages.
+    \item Keep independent backups and test restoring them.
+    \item get enough sleep.
+    \item make shortcuts for frequent tasks.
+    \item keep things organized in folders, with clear naming conventions.
+    \item switch to linux.
+    \item regularly update all of your packages.
+    \item Learn to trouble shoot code yourself
+  \end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}{You do not need to memorise every command}
+  \begin{itemize}
+    \item Shortcuts can be made with a custom keybinding or script. - easier on Linux.
+    \item Use the built-in help and documentation for commands and functions.
+    \item Git can be used inside vscode without the terminal.
+    \item This talk comes with a github repository that walks through most things needed or covered in this workshop but in more detail.
+  \end{itemize}
+  \small
+  \href{https://github.com/hughrodgers139-collab/UCC_physics_computer_literacy/tree/main/Computer_Literacy}
+    {Open the workshop reference material on GitHub}
+\end{frame}
+
+
+
+\appendix
+
+\begin{frame}{Useful References}
+  \begin{itemize}
+    \item \href{https://git-scm.com/book/en/v2}{Pro Git}
+    \item \href{https://docs.github.com/}{GitHub documentation}
+    \item \href{https://www.overleaf.com/learn}{Overleaf learning resources}
+    \item \href{https://docs.python.org/3/tutorial/venv.html}{Python virtual environments}
+    \item \href{https://matplotlib.org/stable/users/index.html}{Matplotlib user guide}
+    \item \href{https://docs.scipy.org/doc/scipy/}{SciPy documentation}
+  \end{itemize}
+\end{frame}
+
+\end{document}

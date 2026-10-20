@@ -1,6 +1,4 @@
-# Python and physics analysis
-
-[Workshop index](../README.md)
+# Python 
 
 - [Open the Python exercise notebook](Exersize.ipynb)
 - [Synthetic linear-motion data](linear_motion.csv)
