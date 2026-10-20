@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+
 \usepackage[a4paper,margin=25mm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -8,6 +9,9 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{titling}
+\usepackage{fancyhdr}
 
 \hypersetup{
   colorlinks=true,
@@ -22,10 +26,54 @@
   keepspaces=true,
   showstringspaces=false
 }
-\title{Debian based Computer Literacy\\Setup and Everyday Reference}
-\author{Hugh Rodgers}
+
+% Move title upwards
+\setlength{\droptitle}{-4cm}
+
+\title{\color{white}
+\hspace*{4cm}\LARGE\bfseries Debian based Computer Literacy\\
+\hspace*{4cm}Setup and Everyday Reference}
+\author{\color{white}\hspace*{12cm}Hugh Rodgers}
+\date{\color{white}\hspace*{12.5cm}\today}
+
+% Creates a header/footer
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header
+\lhead{\includegraphics[height=40pt]{physoc.jpg}}
+\rhead{Debian based Computer Literacy}
+
+% Header and footer lines
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Footer
+\cfoot{Page \thepage}
+
+% Prevent header height warnings
+\setlength{\headheight}{45pt}
+
 \begin{document}
+
+% PDF as background of the first page
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \includegraphics[
+      width=\paperwidth,
+      height=\paperheight
+    ]{Front.pdf}%
+  }%
+}
+
 \maketitle
+
+{\hypersetup{linkcolor=white}
+\color{white}
+\tableofcontents
+}
+
+\newpage
 
 \section{Install VS Code or VSCodium}
 Choose one editor. For VS Code, download the Debian package from the
