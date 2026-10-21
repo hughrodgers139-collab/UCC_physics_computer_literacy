@@ -33,3 +33,5 @@ using your OS guide.
 
 
 ## This is a work in progress, if you are interested in helping please contact via email at 123340696@umail.ucc.ie with the subject "Computer Workshop"
+
+## Huge thank you to 

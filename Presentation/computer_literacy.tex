@@ -50,7 +50,7 @@
 }
 
 \title{Ya sure, I can make a presentation: Computer literacy for physics}
-\institute{UCC Physics Society}
+\institute{UCC Physics and Astronomy Society}
 \date{[Click to add subtitle]}
 \hypersetup{pdftitle={Ya sure, I can make a presentation: Computer literacy for physics},pdfauthor={Hugh Rodgers}}
 \pdfstringdefDisableCommands{\def\translate#1{#1}}
@@ -65,107 +65,15 @@
 
 \begin{frame}{Learning outcomes}
   \begin{enumerate}
+    \item Use LateX in overleaf or another compiler.
     \item Use the terminal and shell or whatever.
     \item Create a project and understand a file path and folders.
     \item Install and run python and pip. 
     \item Create Python environment for the project for your project.
     \item Use Git/GitHub to save project history.
-    \item Use LateX either in vscode/codium, overleaf or another compiler.
     \item Install the Linux Terminal.
   \end{enumerate}
 \end{frame}
-
-
-
-\begin{frame}{Different Operating Systems}
-  \begin{itemize}
-    \item Windows: PowerShell, Python, Git, and an editor.
-    \item macOS: Terminal/zsh, Python, Git, and an editor.
-    \item Debian based: terminal, Python, Git, and an editor.
-    \item LaTeX: Overleaf in a browser or a local TeX distribution.
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Using the terminal/shell and understanding file paths}
-  \begin{center}
-    Terminal $\longrightarrow$ User $\longrightarrow$ Folders
-    $\longrightarrow$ Files
-  \end{center}
-  \begin{itemize}
-    \item The terminal allows you to interact with the shell and navigate the file system.
-    \item A file system is a hierarchical structure of directories (folders) and files.
-    \item Through the terminal you can run commands and open files.
-    \item You are able to install python and run pip commands to create things.
-    \item There are many other things you can do through the terminal like running code and ssh into remote servers, that will not be covered here.
-  \end{itemize}
-\end{frame}
-
-
-
-
-
-
-\begin{frame}[fragile]{File paths and directories}
-\begin{verbatim}
-  .       current directory
-  ..      parent directory
-\end{verbatim}
-  \begin{itemize}
-    \item Relative paths start at the process's working directory.
-    \item File names are case-sensitive and please dont put spaces in them it makes it difficult to specify paths.
-    \item Use forward slashes `/` as directory separators for better compatibility across different operating systems.
-    \item cd is the command to "change directory".  
-  \end{itemize}
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Virtual environment for Python project}
-  \begin{itemize}
-    \item Create and activate a project environment before installing packages.
-    \item Install packages with pip, then use \texttt{deactivate} when finished.
-  \end{itemize}
-  \commandbar{
-    \texttt{python3 -m venv .venv}\\
-    \texttt{source .venv/bin/activate}\\
-    \texttt{python3 -m pip install numpy}\\
-    \texttt{python3 -m pip install -r requirements.txt}\\
-    \texttt{deactivate}
-  }{
-    \texttt{python3 -m venv .venv}\\
-    \texttt{source .venv/bin/activate}\\
-    \texttt{python3 -m pip install numpy}\\
-    \texttt{python3 -m pip install -r requirements.txt}\\
-    \texttt{deactivate}
-  }{
-    \texttt{py -m venv .venv}\\
-    \texttt{.}\textbackslash{}.venv\textbackslash{}Scripts\textbackslash{}Activate.ps1\\
-    \texttt{python -m pip install numpy}\\
-    \texttt{python -m pip install -r requirements.txt}\\
-    \texttt{deactivate}
-  }
-  for windows you may have to run \texttt{Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass}
-\end{frame}
-
-
-% \begin{frame}{Essential Git Commands}
-%   \small
-%   \begin{itemize}
-%     \item \texttt{git init} — create a repository in the current directory.
-%     \item \texttt{git clone URL} — download an existing repository.
-%     \item \texttt{git status} — check the working tree and staged files.
-%     \item \texttt{git diff} — inspect changes not yet staged.
-%     \item \texttt{git add README.md} — stage a file for the next commit.
-%     \item \texttt{git diff --staged} — inspect the changes to be committed.
-%     \item \texttt{git commit -m "Describe the change"} — save a snapshot with a message.
-%     \item \texttt{git switch -c analysis} — create and switch to a branch called analysis.
-%     \item \texttt{git push -u origin analysis} — publish the branch to the remote repository.
-%     \item \texttt{git pull} — get and integrate remote changes.
-%   \end{itemize}
-%   Typical cycle: check status, inspect changes, stage, review the staged diff, then commit.
-% \end{frame}
-
 
 
 \begin{frame}{LaTeX: describe structure, then build}
@@ -198,6 +106,36 @@
 
 
 
+\begin{frame}{Using the terminal/shell and understanding file paths}
+  \begin{itemize}
+    \item The terminal allows you to interact with the shell and navigate the file system.
+    \item A file system is a hierarchical structure of directories (folders) and files.
+    \item Through the terminal you can run commands and open files.
+    \item You are able to install python and run pip commands to create things.
+    \item There are many other things you can do through the terminal like running code and ssh into remote servers, that will not be covered here.
+  \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]{File paths and directories}
+\begin{verbatim}
+  .       current directory
+  ..      parent directory
+\end{verbatim}
+  \begin{itemize}
+    \item Relative paths start at the process's working directory.
+    \item File names are case-sensitive and please dont put spaces in them it makes it difficult to specify paths.
+    \item Use forward slashes `/` as directory separators for better compatibility across different operating systems.
+    \item cd is the command to "change directory".  
+  \end{itemize}
+\end{frame}
+
+
+
 \begin{frame}[fragile]{Structure of a project/LabReport}
 \begin{verbatim}
 pendulum-lab/
@@ -217,6 +155,37 @@ pendulum-lab/
         report.pdf
 \end{verbatim}
 \end{frame}
+
+
+
+\begin{frame}[fragile]{Virtual environment for Python project}
+  \begin{itemize}
+    \item Create and activate a project environment before installing packages.
+    \item Install packages with pip, then use \texttt{deactivate} when finished.
+  \end{itemize}
+  \commandbar{
+    \texttt{python3 -m venv .venv}\\
+    \texttt{source .venv/bin/activate}\\
+    \texttt{python3 -m pip install numpy}\\
+    \texttt{python3 -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }{
+    \texttt{python3 -m venv .venv}\\
+    \texttt{source .venv/bin/activate}\\
+    \texttt{python3 -m pip install numpy}\\
+    \texttt{python3 -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }{
+    \texttt{py -m venv .venv}\\
+    \texttt{.}\textbackslash{}.venv\textbackslash{}Scripts\textbackslash{}Activate.ps1\\
+    \texttt{python -m pip install numpy}\\
+    \texttt{python -m pip install -r requirements.txt}\\
+    \texttt{deactivate}
+  }
+  for windows you may have to run \texttt{Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass}
+\end{frame}
+
+
 
 
 
@@ -271,8 +240,8 @@ pendulum-lab/
     \item This talk comes with a github repository that walks through most things needed or covered in this workshop but in more detail.
   \end{itemize}
   \small
-  \href{https://github.com/hughrodgers139-collab/UCC_physics_computer_literacy/tree/main/Computer_Literacy}
-    {Open the workshop reference material on GitHub}
+  % \href{https://github.com/hughrodgers139-collab/UCC_physics_computer_literacy/tree/main/Computer_Literacy}
+  %   {Open the workshop reference material on GitHub}
 \end{frame}
 
 
@@ -280,14 +249,11 @@ pendulum-lab/
 \appendix
 
 \begin{frame}{Useful References}
-  \begin{itemize}
-    \item \href{https://git-scm.com/book/en/v2}{Pro Git}
-    \item \href{https://docs.github.com/}{GitHub documentation}
-    \item \href{https://www.overleaf.com/learn}{Overleaf learning resources}
-    \item \href{https://docs.python.org/3/tutorial/venv.html}{Python virtual environments}
-    \item \href{https://matplotlib.org/stable/users/index.html}{Matplotlib user guide}
-    \item \href{https://docs.scipy.org/doc/scipy/}{SciPy documentation}
-  \end{itemize}
+  \begin{figure}
+    \includegraphics[width=0.5\linewidth]{Screenshot_20261021_150729_Revolut.png}
+  \end{figure}
 \end{frame}
+
+
 
 \end{document}
