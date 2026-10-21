@@ -145,54 +145,9 @@
     \texttt{python -m pip install -r requirements.txt}\\
     \texttt{deactivate}
   }
+  for windows you may have to run \texttt{Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass}
 \end{frame}
 
-
-
-\begin{frame}{Git}
-  \begin{columns}[T]
-    \begin{column}{0.46\textwidth}
-      \begin{block}{Git: local history}
-        Commits, branches.\\
-        Works offline.\\
-        Records snapshots.
-      \end{block}
-    \end{column}
-    \begin{column}{0.46\textwidth}
-      \begin{block}{GitHub: online collaboration}
-        Hosts repositories.\\
-        Collaborates online.\\
-        Is not local .
-      \end{block}
-    \end{column}
-  \end{columns}
-  \vspace{5mm}
-  Save $\ne$ commit $\ne$ push.\\
-  Save is local to your working directory; Commit records a snapshot in the repository; Push updates the remote repository.
-\end{frame}
-
-
-
-
-\begin{frame}[fragile]{Structure of a project/LabReport}
-\begin{verbatim}
-pendulum-lab/
-    README.md             # this is a brief overview of the project
-    requirements.txt
-    data/                 # this folder contains all the data files
-        raw_measurements.txt
-        raw_measurements_processed.csv
-    analysis/             # code for making graphs and analysis 
-        analysis_script.py
-        analysis_script.ipynb
-    figures/              # neat way of organizing figures
-        Graph.png
-        Graph.jpg
-    report/               # this folder contains the final report
-        report.tex
-        report.pdf
-\end{verbatim}
-\end{frame}
 
 % \begin{frame}{Essential Git Commands}
 %   \small
@@ -240,6 +195,54 @@ pendulum-lab/
   \end{tabular}
 
 \end{frame}
+
+
+
+\begin{frame}[fragile]{Structure of a project/LabReport}
+\begin{verbatim}
+pendulum-lab/
+    README.md             # this is a brief overview of the project
+    requirements.txt
+    data/                 # this folder contains all the data files
+        raw_measurements.txt
+        raw_measurements_processed.csv
+    analysis/             # code for making graphs and analysis 
+        analysis_script.py
+        analysis_script.ipynb
+    figures/              # neat way of organizing figures
+        Graph.png
+        Graph.jpg
+    report/               # this folder contains the final report
+        report.tex
+        report.pdf
+\end{verbatim}
+\end{frame}
+
+
+
+\begin{frame}{Git}
+  \begin{columns}[T]
+    \begin{column}{0.46\textwidth}
+      \begin{block}{Git: local history}
+        Commits, branches.\\
+        Works offline.\\
+        Records snapshots.
+      \end{block}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{block}{GitHub: online collaboration}
+        Hosts repositories.\\
+        Collaborates online.\\
+        Is not local .
+      \end{block}
+    \end{column}
+  \end{columns}
+  \vspace{5mm}
+  Save $\ne$ commit $\ne$ push.\\
+  Save is local to your working directory; Commit records a snapshot in the repository; Push updates the remote repository.
+\end{frame}
+
+
 
 
 
